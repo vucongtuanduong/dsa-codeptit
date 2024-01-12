@@ -20,10 +20,10 @@ nosan: all
 ########################################################################
 
 .PHONY: all
-all: ctdl001
+all: ctdl001.exe
 
-ctdl001: ctdl001.o
-	$(CC) $(CFLAGS) -o ctdl001 ctdl001.o
+ctdl001.exe: ctdl001.o
+	$(CC) $(CFLAGS) -o ctdl001.exe ctdl001.o
 
 ctdl001.o: ctdl001.cpp
 
