@@ -1,9 +1,32 @@
-# Makefile
+# COMP2521 - Week 5 Lab
 
+# !!! DO NOT MODIFY THIS FILE !!!
+
+CC = g++
+CFLAGS = -Wall -Wvla -Werror -g
+
+########################################################################
+
+.PHONY: asan msan nosan
+
+asan: CFLAGS += -fsanitize=address,leak,undefined
+asan: all
+
+msan: CFLAGS += -fsanitize=memory,undefined -fsanitize-memory-track-origins
+msan: all
+
+nosan: all
+
+########################################################################
+
+.PHONY: all
 all: ctdl001
 
-ctdl001: ctdl001.cpp
-	g++ ctdl001.cpp -o ctdl001.exe
+ctdl001: ctdl001.o
+	$(CC) $(CFLAGS) -o ctdl001 ctdl001.o
 
+ctdl001.o: ctdl001.cpp
+
+.PHONY: clean
 clean:
-	rm -f ctdl001
+	rm -f *.o ctdl001.exe
