@@ -34,6 +34,8 @@ void testCase() {
         genNext(a, n);
         
     }
+    cout << count + 1;
+    
 }
 void init(int *a, int n) {
     for (int i = 1; i <= n; i++) {
