@@ -1,24 +1,45 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
-/*
-@echo off
-echo @echo off > compile.bat
-echo g++ %1 -o output.exe >> compile.bat
-echo output.exe >> compile.bat
-echo. > %1
-echo #include <iostream> >> %1
-echo using namespace std; >> %1
-echo. >> %1
-echo int main() { >> %1
-echo     // Your code here >> %1
-echo     return 0; >> %1
-echo } >> %1
-echo. > input.txt
-set filename=%~n1
-echo. > %filename%.md
-echo ## %filename% >> %filename%.md
-*/
+
+void findSubsets(vector<int>& nums, int target, vector<vector<int>>& result, vector<int>& subset, int start);
+void printSubsets(vector<vector<int>>& subsets);
+
 int main() {
-    // Your code here
+    int n, K;
+    cin >> n >> K;
+    vector<int> nums(n);
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+    vector<vector<int>> subsets;
+    vector<int> subset;
+    findSubsets(nums, K, subsets, subset, 0);
+    printSubsets(subsets);
+    cout << subsets.size() << endl;
     return 0;
+}
+
+void findSubsets(vector<int>& nums, int target, vector<vector<int>>& result, vector<int>& subset, int start) {
+    if (target == 0) {
+        result.push_back(subset);
+        return;
+    }
+    for (int i = start; i < nums.size(); i++) {
+        if (nums[i] > target) continue;
+        subset.push_back(nums[i]);
+        findSubsets(nums, target - nums[i], result, subset, i + 1);
+        subset.pop_back();
+    }
+}
+
+void printSubsets(vector<vector<int>>& subsets) {
+    reverse(subsets.begin(), subsets.end());
+    for (const auto& subset : subsets) {
+        for (int num : subset) {
+            cout << num << " ";
+        }
+        cout << endl;
+    }
 }

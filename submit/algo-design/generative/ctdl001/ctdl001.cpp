@@ -5,9 +5,10 @@ bool isFinal(int *x, int n);
 void testCase();
 void display(int *x ,int n, bool reversed);
 void genNext(int *x, int n);
-
+bool check(int *x, int n);
+void testCase2();
 int main () {
-    testCase();
+    testCase2();
     return 0;
 }
 void init(int *x, int n) {
@@ -83,4 +84,27 @@ void testCase() {
     }
     
 
+}
+void testCase2() {
+    int n;
+    cin >> n;
+    int *x = new int[n + 1];
+    init(x, n);
+    while (!isFinal(x, n)) {
+        if (check(x, n)) {
+            display(x, n, false);
+            cout << endl;
+        }
+        genNext(x, n);
+    }
+    display(x, n, false);
+    cout << endl;
+}
+bool check(int *x, int n) {
+    for (int i = 1; i <= n / 2; i++) {
+        if (x[i] != x[n - i + 1]) {
+            return false;
+        }
+    }
+    return true;
 }
