@@ -2,43 +2,51 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
-void findSubsets(vector<int>& nums, int target, vector<vector<int>>& result, vector<int>& subset, int start);
-void printSubsets(vector<vector<int>>& subsets);
-
-int main() {
-    int n, K;
-    cin >> n >> K;
-    vector<int> nums(n);
-    for (int i = 0; i < n; i++) {
-        cin >> nums[i];
-    }
-    vector<vector<int>> subsets;
-    vector<int> subset;
-    findSubsets(nums, K, subsets, subset, 0);
-    printSubsets(subsets);
-    cout << subsets.size() << endl;
+void testCase();
+void Try(vector<int> a,vector<int>&found, vector<vector<int>> &res, int target, int start);
+void result(vector<vector<int>> res);
+int main () {
+    testCase();
     return 0;
 }
-
-void findSubsets(vector<int>& nums, int target, vector<vector<int>>& result, vector<int>& subset, int start) {
+void testCase() {
+    int n, k;
+    cin >> n >> k;
+    vector<int> a;
+    vector<int>found;
+    vector<vector<int>> res;
+    for (int i = 0; i < n; i++) {
+        int tmp;
+        cin >> tmp;
+        a.push_back(tmp);
+    }
+    // sort(a.begin(), a.end());
+    Try(a, found, res, k, 0);
+    result(res);
+    cout << res.size() << endl;
+}
+void Try(vector<int> a,vector<int>&found, vector<vector<int>> &res, int target, int start) {
     if (target == 0) {
-        result.push_back(subset);
+        res.push_back(found);
         return;
     }
-    for (int i = start; i < nums.size(); i++) {
-        if (nums[i] > target) continue;
-        subset.push_back(nums[i]);
-        findSubsets(nums, target - nums[i], result, subset, i + 1);
-        subset.pop_back();
+    for (int i = start; i < a.size(); i++) {
+        if (a[i] > target) {
+            continue;
+        }
+        found.push_back(a[i]);
+        Try(a, found, res, target - a[i], i + 1);
+        found.pop_back();
     }
-}
 
-void printSubsets(vector<vector<int>>& subsets) {
-    reverse(subsets.begin(), subsets.end());
-    for (const auto& subset : subsets) {
-        for (int num : subset) {
-            cout << num << " ";
+
+}
+void result(vector<vector<int>> res) {
+    vector<vector<int>> temp = res;
+    reverse(temp.begin(), temp.end());
+    for (auto x : temp) {
+        for (int i = 0; i < x.size(); i++) {
+            cout << x[i] << " ";
         }
         cout << endl;
     }
