@@ -7,8 +7,8 @@ struct node {
     node *next;
 };
 void testCase();
-node *newNode(int value, node *next);
-void deleteItem(node *head, map<int>mp1, map<int>mp2);
+node *newNode(int value);
+void deleteItem(node *head);
 void printList(node *head);
 int main() {
     // Your code here
@@ -17,51 +17,53 @@ int main() {
 }
 void printList(node *head) {
     node *curr = head;
-    vector<int> res;
-    while (curr->next != NULL) {
-        res.push_back(curr->data);
+
+    while (curr != NULL) {
+        cout << curr->data << " ";
         curr = curr->next;
     }
-    for (int i = res.size() - 1; i >= 0; i--) {
-        cout << res[i] << " ";
     
-    }
 }
 void testCase() {
     int n;
     cin >> n;
-    node *head = new node;
-    map<int> mp1, mp2;
+    node *head = nullptr;
+    node *curr = nullptr;
     for (int i = 0; i < n; i++) {
         int value;
         cin >> value;
-        mp1[value]++;
-        mp2[value] = 0;
-        head = newNode(value, head);
+        if (head == nullptr) {
+            head = newNode(value);
+            curr = head;
+        } else {
+            curr->next = newNode(value);
+            curr = curr->next;
+        }
     }
     deleteItem(head);
     
     printList(head);
     
 }
-node *newNode(int value, node *next) {
+node *newNode(int value) {
     node *temp = new node;
     temp->data = value;
-    temp->next = next;
+    temp->next = nullptr;
     return temp;
 }
-void deleteItem(node *head, map<int>mp1, map<int>mp2) {
+void deleteItem(node *head) {
+    map<int,bool> seen;
     node *curr = head;
-    int count = 0;
-    while (curr->next != NULL) {
-        if (m1[curr]) {
-            node *temp = curr->next;
-            curr->next = curr->next->next;
-            delete temp;
-            count++;
+    node *prev = nullptr;
+    while (curr != nullptr) {
+        if (seen[curr->data]) {
+            prev->next = curr->next;
+            delete curr;
+            curr = prev->next;
         } else {
+            seen[curr->data] = true;
+            prev = curr;
             curr = curr->next;
         }
     }
-    return count;
 }
