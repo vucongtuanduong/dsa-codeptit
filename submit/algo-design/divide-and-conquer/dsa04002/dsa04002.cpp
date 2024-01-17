@@ -30,19 +30,13 @@ long long reversed(long long a) {
     return res;
 }
 long long powll(long long a, long long b) {
-    if (b == 1) {
-        return a;
-    }
     if (b == 0) {
         return 1;
-
     }
     long long res = powll(a, b / 2);
-    if (b % 2 == 0) {
-        res = (res * res) % MOD;
-    } else {
-        res = a * ((res * res) % MOD);
-        res %= MOD;
+    res = (res * res) % MOD;
+    if (b % 2 != 0) {
+        res = (res * a) % MOD;
     }
     return res;
 }

@@ -6,10 +6,10 @@
 using namespace std;
 void testCase();
 bool cmp(pair<int,int> a, pair<int,int> b) {
-    if (a.first == b.first) {
-        return a.second < b.second;
+    if (a.second == b.second) {
+        return a.first < b.first;
     }
-    return a.first < b.first;
+    return a.second < b.second;
 }
 int main() {
     // Write your code here
@@ -30,10 +30,10 @@ void testCase() {
     for (int i = 0; i < n; i++) {
         cin >> b[i];
         a[i] = abs(x - b[i]);
-        v.push_back(make_pair(a[i], b[i]));
+        v.push_back(make_pair(i, a[i]));
     }
     sort(v.begin(), v.end(), cmp);
     for (int i = 0; i < n; i++) {
-        cout << v[i].second << " ";
+        cout << b[v[i].first] << " ";
     }
 }
