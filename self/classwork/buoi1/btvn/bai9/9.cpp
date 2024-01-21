@@ -1,23 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 int main() {
     string s;
     cin >> s;
-    vector<int> freq(26, 0);
-    vector<int> prefix(26, 0);
-    int prefix_sum = 0;
-    int intersections = 0;
-    for (char c : s) {
-        int index = c - 'A';
-        if (freq[index] == 1) {
-            intersections += prefix_sum - prefix[index]; 
+    int count  = 0;
+    int a[26], b[26];
+    for (int i = 0; i < 26; i++) {
+        a[i] = -1;
+    }
+    for (int i = 0; i < 52; i++) {
+        if (a[s[i] - 'A'] == -1) { // first occurence
+            a[s[i] - 'A'] = i;
         } else {
-            freq[index] = 1;
-            prefix[index] = prefix_sum;
-            prefix_sum++;
+            b[s[i] - 'A'] = i; //second occurence
         }
     }
-    cout << intersections << endl;
-    return 0;
+
+    for(int i = 0; i < 26; i++){
+        for(int j = 0; j < 26; j++){
+            if(a[i] < a[j] && a[j] < b[i] && b[i] < b[j]){
+                count++;
+			}
+		}
+	}
+    cout << count;
 }
