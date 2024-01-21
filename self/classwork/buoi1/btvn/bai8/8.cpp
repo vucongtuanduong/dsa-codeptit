@@ -1,6 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 void testCase();
+void tolower(string &s);
+void toupper(char &c);
+int main () {
+    int t;
+    cin >> t;
+    cin.ignore();
+    while (t--) {
+        testCase();
+        cout << endl;
+    }
+    return 0;
+}
 void toupper(char &c) {
     if (c >= 'a' && c <= 'z') {
         c -= 32;
@@ -14,21 +26,9 @@ void tolower(string &s) {
     }
 
 }
-int main () {
-    int t;
-    cin >> t;
-    cin.ignore();
-    while (t--) {
-        testCase();
-        cout << endl;
-    }
-    // testCase();
-    return 0;
-}
 void testCase() {
     string s;
     getline(cin, s);
-    // cout << s << endl;
     stringstream ss(s);
     string temp;
     vector<string> res;

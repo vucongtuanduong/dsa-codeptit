@@ -32,8 +32,8 @@ bool isDecreasing(string s) {
 
 }
 void testCase() {
-    string s;
-    cin >> s;
+    string n;
+    cin >> n;
     if (isIncreasing(s) || isDecreasing(s)) {
         cout << "YES";
     } else {

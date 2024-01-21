@@ -8,19 +8,24 @@ int main () {
         testCase();
         cout << endl;
     }
-    // testCase();
     return 0;
 }
 void testCase() {
     int n;
     cin >> n;
     int count = 0;
-    for (int i = 2; i <= n; i++) {
-        while (n % i == 0) {
+    int x = sqrt(n);
+    if (x * x == n && x % 2 == 0) {
+        count++;
+    }
+    for (int i = 1; i < sqrt(n); i++) {
+        if (n % i == 0) {
             if (i % 2 == 0) {
                 count++;
             }
-            n /= i;
+            if ((n / i) % 2 == 0) {
+                count++;
+            }
         }
     }
     cout << count;
