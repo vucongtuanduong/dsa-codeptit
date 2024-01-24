@@ -58,65 +58,53 @@ int GraphDegree(Graph *g, Vertex v);
 void GraphShow(Graph *g);
 
 void testCase();
-
+void bfs(Graph *g, Vertex v);
 int main () {
-    // int t;
-    // cin >> t;
-    // while (t--) {
-    //     testCase();
-    //     cout << endl;
-    // }
-    testCase();
+    int t;
+    cin >> t;
+    while (t--) {
+        testCase();
+        cout << endl;
+    }
+    // testCase();
     return 0;
 }
 void testCase() {
-    int nV;
-    cin >> nV;
-    cin.ignore();
+    int nV, nE, x;
+    cin >> nV >> nE >> x;
+    // cin.ignore();
     Graph *g = GraphNew(nV);
-    for (int i = 0; i < nV; i++) {
-        string s;
-        getline(cin, s);
-        stringstream ss(s);
-        string temp;
-        while (ss >> s) {
-            int w = stoi(s);
-            GraphInsertEdge(g, i, w - 1);
-        }
-        // GraphInsertEdge(g, v - 1, w - 1);
+    for (int i = 0; i < nE; i++) {
+        int v, w;
+        cin >> v >> w;
+        GraphInsertEdge(g, v - 1, w - 1);
     }
-    GraphShow(g);
+    // GraphShow(g);
     // dfsNotRec(g, v - 1);
+    bfs(g, x - 1);
 }
-void dfsNotRec(Graph *g, Vertex v) {
-    bool *visited = new bool[g->nV];
-    for (int i = 0; i < g->nV; i++) {
+void bfs(Graph *g, Vertex v) {
+    queue<Vertex> q;
+    bool visited[g->nV];
+    for (Vertex i = 0; i < g->nV; i++) {
         visited[i] = false;
     }
-    stack<Vertex> st;
-    st.push(v);
+    q.push(v);
     visited[v] = true;
-    set<Vertex> traversedVertex;
-    cout << v + 1 << " ";
-    while (!st.empty()) {
-        Vertex x = st.top();
-        st.pop();
-        traversedVertex.insert(x);
-        adjNode *curr = g->edges[x];
+    while (!q.empty()) {
+        Vertex u = q.front();
+        
+        q.pop();
+        adjNode *curr = g->edges[u];
         for (; curr != NULL; curr = curr->next) {
             if (!visited[curr->v]) {
-                if (traversedVertex.find(curr->v) != traversedVertex.end()) {
-                    continue;
-                } else {
-                    cout << curr->v + 1 << " ";
-                }
-                st.push(x);
-                st.push(curr->v);
+                q.push(curr->v);
                 visited[curr->v] = true;
-                break;
             }
         }
+        cout << u + 1 << " ";
     }
+
 }
 
 Graph *GraphNew(int nV) {
