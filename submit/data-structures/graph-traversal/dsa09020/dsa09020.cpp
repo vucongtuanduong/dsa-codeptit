@@ -61,11 +61,18 @@ int main () {
 void testCase() {
     int nV;
     cin >> nV;
+    cin.ignore();
     Graph *g = GraphNew(nV);
     for (int i = 0; i < nV; i++) {
-        int v, w;
-        cin >> v >> w;
-        GraphInsertEdge(g, v - 1, w - 1);
+        string s;
+        getline(cin, s);
+        stringstream ss(s);
+        string temp;
+        while (ss >> temp) {
+            int w = stoi(temp);
+            GraphInsertEdge(g, i, w - 1);
+        }
+        // GraphInsertEdge(g, v - 1, w - 1);
     }
     GraphShow(g);
 }
