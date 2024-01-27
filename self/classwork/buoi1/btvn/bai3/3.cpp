@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 void testCase();
+void testCase2();
 int main () {
     int t;
     cin >> t;
@@ -9,6 +10,27 @@ int main () {
         cout << endl;
     }
     return 0;
+}
+void testCase2() {
+    int n;
+    cin >> n;
+    int a[n];
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        
+    }
+    int i = 0, j = n - 1;
+    while (i != j && a[i] == a[j]) {
+        i++;
+        j--;
+    }
+    if (i != j) {
+        cout << "NO";
+        return;
+    } else {
+        cout << "YES";
+        return;
+    }
 }
 void testCase() {
     int n;
