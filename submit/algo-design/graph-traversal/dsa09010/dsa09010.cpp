@@ -32,7 +32,7 @@ void dfs(Graph *g, int v, bool *visited) {
 }
 void reinit(Graph *g, bool *visited) {
     for (int i = 1; i <= g->nV; i++) {
-        visited[i] = true;
+        visited[i] = false;
     }
 }
 int countVertices(Graph *g, bool *visited) {
@@ -50,6 +50,7 @@ bool isStronglyConnected(Graph *g) {
         reinit(g, visited);
         dfs(g, i, visited);
         int count = countVertices(g, visited);
+        // cout << "i: " << i << ", vertices: " << count << endl;
         if (count != g->nV) {
             return false;
         }
