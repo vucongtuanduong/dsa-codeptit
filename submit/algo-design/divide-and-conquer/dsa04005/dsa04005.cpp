@@ -20,8 +20,8 @@ void testCase() {
     cin >> n >> k;
     while (true) {
         if (n == 1 || n == 2) {
-            if (n == 1) cout << "0";
-            else cout << "1";
+            if (n == 1) cout << "A";
+            else cout << "B";
             return;
         }
         if (k > fibo[n - 2]) {
