@@ -1,2 +1,2 @@
 ## Description
-Graph traversal
+Graph problems
