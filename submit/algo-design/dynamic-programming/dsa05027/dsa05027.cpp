@@ -3,7 +3,6 @@
 #include <algorithm>
 using namespace std;
 void testCase();
-bool cmp(pair<int,int>a, pair<int, int> b);
 int main() {
     // Write your code here
     int t;
@@ -14,18 +13,22 @@ int main() {
     }
     return 0;
 }
-bool cmp(pair<int,int>a, pair<int, int> b) {
-    return (1.0 * a.first / a.second) > (1.0 * b.first / b.second);
-}
 void testCase() {
     int  n, v;
-    pair<int,int> knapsack[n];
     cin >> n >> v;
-    for (int i = 0; i < n; i++) {
-        cin >> knapsack.second[i];
+    int a[n + 1], c[n + 1];
+    for(int i = 1; i <= n; i++) {
+        cin >> a[i];
     }
-    for (int i = 0; i < n; i++) {
-        cin >> knapsack.first[i];
+    for (int i = 1; i <= n; i++) {
+        cin >> c[i];
     }
-    sort(a, a + n, cmp);
-}
+    int dp[v + 1] = {0};
+    for (int i = 1; i <= n; i++) {
+        for (int j = v; j >= a[i]; j--) {
+            dp[j] = max(dp[j], dp[j - a[i]] + c[i]);
+        }
+    }
+    cout << dp[v];
+
+}   
