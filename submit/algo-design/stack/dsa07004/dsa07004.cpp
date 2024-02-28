@@ -1,28 +1,26 @@
 #include <iostream>
 #include <stack>
 using namespace std;
-void testCase();
+
 int main() {
-    // Write your code here
-    int t;
-    cin >> t;
-    while (t--) {
-        testCase();
-        cout << endl;
+    int T;
+    cin >> T;
+    while (T--) {
+        string S;
+        cin >> S;
+        stack<char> st;
+        int cnt = 0;
+        for (char c : S) {
+            if (c == '(') {
+                st.push(c);
+            } else if (!st.empty()) {
+                st.pop();
+            } else {
+                cnt++;
+            }
+        }
+        cnt += st.size() / 2;
+        cout << cnt << endl;
     }
     return 0;
-}
-void testCase() {
-    string s;
-    cin >> s;
-    stack<char> st;
-    int n = s.size();
-    for (int i = 0; i < n; i++) {
-        if (s[i] == '(') {
-            st.push(s[i]);
-        } else {
-            st.pop();
-        }
-    }
-    cout << st.size();
 }
