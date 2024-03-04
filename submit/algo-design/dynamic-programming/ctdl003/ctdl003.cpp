@@ -13,8 +13,8 @@ void testCase() {
     int n, w;
     cin >> n >> w;
     int a[n],c[n];
-    scanArray(a, n);
     scanArray(c, n);
+    scanArray(a, n);
     int dp[n + 1][w + 1];
     memset(dp, 0, sizeof(dp));
     for (int i = 1; i <= n; i++) {
