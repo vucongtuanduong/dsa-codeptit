@@ -6,7 +6,7 @@ cd $1
 touch $1.cpp $1.md input.txt
 
 echo "## $1" >> $1.md
-echo "#include <iostream>" >> $1.cpp
+echo "#include <bits/stdc++.h>" >> $1.cpp
 echo "using namespace std;" >> $1.cpp
 echo "" >> $1.cpp
 echo "int main() {" >> $1.cpp
