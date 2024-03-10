@@ -4,15 +4,35 @@
 using namespace std;
 void testCase();
 void testCase2();
+void testCase3();
 int main() {
     // Write your code here
     int t;
     cin >> t;
     while (t--) {
-        testCase();
+        testCase3();
         cout << endl;
     }
     return 0;
+}
+void testCase3() {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    vector<int> b(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        b[i] = a[i];
+    }
+    sort(a.begin(), a.end());
+    int i = 0, j = n - 1;
+    while (a[i] == b[i]) {
+        i++;
+    }
+    while (a[j] == b[j] && j > i) {
+        j--;
+    }
+    cout << i + 1 << " " << j + 1 ;
 }
 void testCase2() {
     int n; cin >> n;

@@ -32,7 +32,22 @@ void testCase() {
     }
     cout << findRotations(a, n);
 }
-
+void testCase2() {
+    long long n;
+    cin >> n;
+    long long a[n];
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    long long res = 0;
+    for (int i = 1; i < n; i++) {
+        if (a[i] < a[i - 1]) {
+            cout << i;
+            return;
+        }
+    }
+    cout << "0";
+}
 int main() {
     long long t;
     cin >> t;

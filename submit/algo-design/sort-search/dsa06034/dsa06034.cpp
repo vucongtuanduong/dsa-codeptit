@@ -5,15 +5,31 @@
 using namespace std;
 void testCase();
 void testCase2();
+void testCase3();
 int main() {
     // Write your code here
     int t;
     cin >> t;
     while (t--) {
-        testCase2();
+        testCase3();
         cout << endl;
     }
     return 0;
+}
+void testCase3() {
+    int n, k;
+    cin >> n >> k;
+    vector<int> a(n);
+    long long count = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    sort(a.begin(), a.end());
+    for (int i = 0; i < n; i++) {
+        count += upper_bound(a.begin() + i + 1, a.end(), k - a[i]) - lower_bound(a.begin() + i + 1, a.end(), k - a[i]);
+
+    }
+    cout << count;
 }
 void testCase2() {
     int n, k;
