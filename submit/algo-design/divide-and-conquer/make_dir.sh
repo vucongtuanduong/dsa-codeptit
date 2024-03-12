@@ -32,7 +32,7 @@ if [ -d "$1" ]; then
 else
     mkdir -p $1
     cd $1
-    touch $1.cpp $1.md input.txt
+    touch $1.cpp input.txt output.txt
 
     echo "## $1" >> README.md
     echo "#include <bits/stdc++.h>" >> $1.cpp
