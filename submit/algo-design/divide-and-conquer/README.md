@@ -1,2 +1,0 @@
-## Description
-Divide and conquer
