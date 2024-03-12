@@ -21,6 +21,10 @@ if [ -d "$1" ]; then
     echo "" >> $filename
     echo "int main() {" >> $filename
     echo "    // Write your code here" >> $filename
+    echo "    #ifndef ONLINE_JUDGE" >> $filename
+    echo "    freopen(\"input.txt\", \"r\", stdin);" >> $filename
+    echo "    freopen(\"output.txt\", \"w\", stdout);" >> $filename
+    echo "    #endif" >> $filename
     echo "    return 0;" >> $filename
     echo "}" >> $filename
 
@@ -30,12 +34,16 @@ else
     cd $1
     touch $1.cpp $1.md input.txt
 
-    echo "## $1" >> $1.md
+    echo "## $1" >> README.md
     echo "#include <bits/stdc++.h>" >> $1.cpp
     echo "using namespace std;" >> $1.cpp
     echo "" >> $1.cpp
     echo "int main() {" >> $1.cpp
     echo "    // Write your code here" >> $1.cpp
+    echo "    #ifndef ONLINE_JUDGE" >> $1.cpp
+    echo "    freopen(\"input.txt\", \"r\", stdin);" >> $1.cpp
+    echo "    freopen(\"output.txt\", \"w\", stdout);" >> $1.cpp
+    echo "    #endif" >> $1.cpp
     echo "    return 0;" >> $1.cpp
     echo "}" >> $1.cpp
 
