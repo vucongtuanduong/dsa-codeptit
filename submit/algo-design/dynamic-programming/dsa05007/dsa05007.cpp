@@ -1,31 +1,41 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
-
-long long maxSum(vector<int>& arr) {
-    int n = arr.size();
-    if(n == 1) return arr[0];
-    vector<long long> dp(n, 0);
-    dp[0] = arr[0];
-    dp[1] = max(arr[0], arr[1]);
-    for (int i = 2; i < n; i++) {
-        dp[i] = max(dp[i-1], arr[i] + dp[i-2]);
-    }
-    return dp[n-1];
-}
-
+void testCase();
+long long maxSum(vector<int> a);
 int main() {
+    // Write your code here
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif
     int t;
     cin >> t;
     while (t--) {
-        int n;
-        cin >> n;
-        vector<int> arr(n);
-        for (int i = 0; i < n; i++) {
-            cin >> arr[i];
-        }
-        cout << maxSum(arr) << endl;
+        testCase();
+        cout << endl;
     }
     return 0;
+}
+long long maxSum(vector<int> a) {
+    int n = a.size();
+    if (n == 1) {
+        return a[0];
+    }
+    vector<long long> dp(n, 0);
+    dp[0] = a[0];
+    dp[1] = max(a[0], a[1]);
+    for (int i = 2; i < n; i++) {
+        dp[i] = max(dp[i - 1], a[i] + dp[i - 2]);
+    }
+    return dp[n - 1];
+}
+void testCase() {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    cout << maxSum(a);
+
 }
