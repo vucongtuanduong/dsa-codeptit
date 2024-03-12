@@ -1,45 +1,44 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-
-#define MAX 10000
-
-unsigned ugly[MAX];
-
-void uglyNumbers() {
-    unsigned i2 = 0, i3 = 0, i5 = 0;
-    unsigned next_multiple_of_2 = 2;
-    unsigned next_multiple_of_3 = 3;
-    unsigned next_multiple_of_5 = 5;
-    unsigned next_ugly_no = 1;
-
-    ugly[0] = 1;
-
-    for (int i=1; i<MAX; i++) {
-        next_ugly_no = min(next_multiple_of_2, min(next_multiple_of_3, next_multiple_of_5));
-        ugly[i] = next_ugly_no;
-        if (next_ugly_no == next_multiple_of_2) {
-            i2 = i2+1;
-            next_multiple_of_2 = ugly[i2]*2;
-        }
-        if (next_ugly_no == next_multiple_of_3) {
-            i3 = i3+1;
-            next_multiple_of_3 = ugly[i3]*3;
-        }
-        if (next_ugly_no == next_multiple_of_5) {
-            i5 = i5+1;
-            next_multiple_of_5 = ugly[i5]*5;
-        }
-    }
-}
-
+void testCase();
+void uglyNumber();
+const int MAX = 10001;
+vector<long long> ugly(MAX, 0);
+void uglyNumber();
 int main() {
+    // Write your code here
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif
     int t;
     cin >> t;
-    uglyNumbers();
+    uglyNumber();
     while (t--) {
-        int n;
-        cin >> n;
-        cout << ugly[n-1] << endl;
+        testCase();
+        cout << endl;
     }
     return 0;
+}
+void testCase() {
+    int n;
+    cin >> n;
+    cout << ugly[n];
+}
+void uglyNumber() {
+    int i2 = 1, i3 = 1, i5 = 1;
+    ugly[1] = 1;
+    for (int i = 2; i < MAX; i++) {
+        ugly[i]  = min(ugly[i2] * 2, min( ugly[i3] * 3, ugly[i5] * 5));
+        if (ugly[i] == ugly[i2] * 2) {
+            i2 ++;
+        }
+        if (ugly[i] == ugly[i3] * 3) {
+            i3 ++;
+        } 
+        if (ugly[i] == ugly[i5] * 5) {
+            i5++;
+        }
+
+    }
 }
