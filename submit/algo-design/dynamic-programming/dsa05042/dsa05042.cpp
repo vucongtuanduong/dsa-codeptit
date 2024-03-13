@@ -1,36 +1,41 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-
-string isSubarraySum(int N, long long K, vector<long long>& A) {
-    long long sum = A[0];
-    int start = 0;
-    for (int i = 1; i <= N; i++) {
-        while (sum > K && start < i-1) {
-            sum -= A[start];
-            start++;
-        }
-        if (sum == K) {
-            return "YES";
-        }
-        if (i < N) {
-            sum += A[i];
-        }
-    }
-    return "NO";
-}
-
+void testCase();
 int main() {
-    int T;
-    cin >> T;
-    while (T--) {
-        int N;
-        long long K;
-        cin >> N >> K;
-        vector<long long> A(N);
-        for (int i = 0; i < N; i++) {
-            cin >> A[i];
-        }
-        cout << isSubarraySum(N, K, A) << endl;
+    // Write your code here
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif
+    int t;
+    cin >> t;
+    while (t--) {
+        testCase();
+        cout << endl;
     }
     return 0;
+}
+void testCase() {
+    long long n, k;
+    cin >> n >> k;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++ ){
+        cin >> a[i];
+    }
+    long long sum = a[0];
+    int start = 0;
+    for (int i = 1; i <= n; i++) {
+        while (sum > k && start < i - 1) {
+            sum -= a[start];
+            start++;
+        }
+        if (sum == k) {
+            cout << "YES";
+            return;
+        }
+        if (i < n) {
+            sum += a[i];
+        }
+    }
+    cout << "NO";
 }
