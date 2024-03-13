@@ -1,36 +1,41 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-
-int longestBitonicSubarray(int N, vector<int>& A) {
-    vector<int> inc(N, 1), dec(N, 1);
-    for (int i = 1; i < N; i++) {
-        if (A[i] > A[i-1]) {
-            inc[i] = inc[i-1] + 1;
-        }
-    }
-    for (int i = N-2; i >= 0; i--) {
-        if (A[i] > A[i+1]) {
-            dec[i] = dec[i+1] + 1;
-        }
-    }
-    int max_len = 0;
-    for (int i = 0; i < N; i++) {
-        max_len = max(max_len, inc[i] + dec[i] - 1);
-    }
-    return max_len;
-}
-
+void testCase();
 int main() {
-    int T;
-    cin >> T;
-    while (T--) {
-        int N;
-        cin >> N;
-        vector<int> A(N);
-        for (int i = 0; i < N; i++) {
-            cin >> A[i];
-        }
-        cout << longestBitonicSubarray(N, A) << endl;
+    // Write your code here
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif
+    int t;
+    cin >> t;
+    while (t--) {
+        testCase();
+        cout << endl;
     }
     return 0;
+}
+void testCase() {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    vector<int> increasing(n, 1), decreasing(n, 1);
+    for (int i = 1; i < n; i++) {
+        if (a[i] > a[i - 1]) {
+            increasing[i] = increasing[i - 1] + 1;
+        }
+    }
+    for (int i = n - 2; i >= 0; i--) {
+        if (a[i] > a[i + 1]) {
+            decreasing[i] = decreasing[i + 1] + 1;
+        }
+    }
+    int max_length = 0;
+    for (int i = 0; i < n; i++) {
+        max_length = max(max_length, increasing[i] + decreasing[i] - 1);
+    }
+    cout << max_length;
 }
