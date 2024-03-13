@@ -16,16 +16,17 @@ int main() {
     return 0;
 }
 void testCase() {
-    int n, x, y, z;
-    cin >> n >> x >> y >> z;
-    vector<int> dp(n + 1, INT_MAX);
-    dp[1] = x;
-    for (int i = 2; i <= n; i++) {
-        if (i % 2 == 0) {
-            dp[i] = min(dp[i], min(dp[i - 1] + x, dp[i / 2] + z));
-        } else {
-            dp[i] = min(dp[i], min(dp[i - 1] + x, dp[i / 2 + 1] + z + y));
+    string s;
+    cin >> s;
+    long long res = s[0] - '0';
+    int n =s.size();
+    for (int i = 1; i < n; i++) {
+        for (int j = i; j >= 0; j--) {
+            string temp = s.substr(j, i - j + 1);
+            long long x = stoll(temp);
+            res += x;
+
         }
     }
-    cout << dp[n];
+    cout << res;
 }

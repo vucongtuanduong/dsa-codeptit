@@ -52,3 +52,30 @@ Với n lẻ có thể được biến đổi bằng 3 cách tốn ít chi phí 
 Với n chẵn có thể được biến đổi bằng 2 cách tốn ít chi phí nhất:
 + f[n - 1] -> insert
 + f[n / 2] -> copy
+
+## Explain the algorithm
+Sure, let's break it down:
+
+This problem is about finding the minimum time to write N identical characters on the screen. You have three operations:
+
+1. Insert a character (costs X time)
+2. Delete the last character (costs Y time)
+3. Copy and paste all written characters (costs Z time)
+
+The goal is to find the minimum time to write N characters.
+
+The solution uses a technique called dynamic programming. The idea is to break down the problem into smaller subproblems, solve each subproblem, and use the solutions to the subproblems to solve the original problem.
+
+Here, the subproblems are finding the minimum time to write i characters for all i from 1 to N. We use an array `dp` to store the solutions to the subproblems. `dp[i]` is the minimum time to write i characters.
+
+We start by setting `dp[1]` to X because it takes X time to write one character.
+
+Then, for each i from 2 to N, we consider all possible operations:
+
+- If i is even, we can get i characters by either inserting one character to i-1 characters or copying i/2 characters. So, `dp[i]` is the minimum of `dp[i-1] + X` and `dp[i/2] + Z`.
+
+- If i is odd, we can get i characters by either inserting one character to i-1 characters or copying (i+1)/2 characters and deleting one character. So, `dp[i]` is the minimum of `dp[i-1] + X` and `dp[(i+1)/2] + Z + Y`.
+
+Finally, `dp[N]` is the minimum time to write N characters.
+
+The time complexity of this solution is O(N) because we fill the `dp` array in a single loop. The space complexity is O(N) for the `dp` array.
