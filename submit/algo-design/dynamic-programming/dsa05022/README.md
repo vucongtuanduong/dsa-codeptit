@@ -39,3 +39,16 @@ int main() {
 
 Time Complexity Analysis:
 The time complexity of the above solution is O(N) because we use a single loop to fill the `dp` array. The space complexity is O(N) for the `dp` array.
+
+## Explain
+Test có TH n = 1
+Bài toán cơ sở: f[0] = 0, f[1] = insert (luôn luôn bắt đầu từ insert)
+
+Với n lẻ có thể được biến đổi bằng 3 cách tốn ít chi phí nhất:
++ f[n - 1] -> insert
++ f[(n - 1) / 2] -> copy -> insert
++ f[(n + 1) / 2] -> copy -> delete
+
+Với n chẵn có thể được biến đổi bằng 2 cách tốn ít chi phí nhất:
++ f[n - 1] -> insert
++ f[n / 2] -> copy

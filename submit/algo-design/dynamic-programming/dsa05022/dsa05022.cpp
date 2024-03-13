@@ -18,5 +18,8 @@ int main() {
 void testCase() {
     int n, x, y, z;
     cin >> n >> x >> y >> z;
-    
+    vector<int> dp(n + 1, INT_MAX);
+    for (int i = 0; i < n; i++) {
+        
+    }
 }
