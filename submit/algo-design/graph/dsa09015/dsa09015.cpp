@@ -1,9 +1,7 @@
-#include <iostream>
-#include <stack>
-#include <vector>
-#include <set>
+#include <bits/stdc++.h>
 using namespace std;
-struct Graph{
+struct Graph
+{   
     int nV;
     int nE;
     vector<int> edges[1001];
@@ -32,7 +30,7 @@ bool findCycle(Graph *g, int u, bool *visited, int parent) {
         if (!visited[current]) {
             if (findCycle(g, current, visited, u)) {
                 return true;
-            } 
+            }
         } else if (current != parent) {
             return true;
         }
@@ -40,8 +38,8 @@ bool findCycle(Graph *g, int u, bool *visited, int parent) {
     return false;
 }
 bool hasCycle(Graph *g) {
-    bool *visited = new bool [g->nV];
-    for (int i = 0; i < g->nV; i++ ){
+    bool *visited = new bool[g->nV];
+    for (int i = 0; i < g->nV; i++) {
         visited[i] = false;
     }
     for (int i = 0; i < g->nV; i++) {
@@ -55,17 +53,16 @@ bool hasCycle(Graph *g) {
 }
 void testCase() {
     int nV, nE;
-    cin >> nV >> nE;
+    cin >> nV >>  nE;
     Graph *g = new Graph;
     g->nV = nV;
     g->nE = nE;
-    for (int i = 0; i < nE; i++) {
+    for (int i = 0; i < g->nE; i++) {
         int u, v;
         cin >> u >> v;
         u--;
         v--;
         g->edges[u].push_back(v);
-        g->edges[v].push_back(u);
     }
     if (hasCycle(g)) {
         cout << "YES";
