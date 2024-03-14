@@ -8,7 +8,7 @@ struct Graph
 };
 void testCase();
 bool hasCycle(Graph *g);
-bool findCycle(Graph *g, int u, bool *visited, int parent);
+bool findCycle(Graph *g, int u, bool *visited, bool *recStack);
 int main() {
     // Write your code here
     #ifndef ONLINE_JUDGE
@@ -23,30 +23,32 @@ int main() {
     }
     return 0;
 }
-bool findCycle(Graph *g, int u, bool *visited, int parent) {
-    visited[u] = true;
-    for (int i = 0; i < g->edges[u].size(); i++) {
-        int current = g->edges[u][i];
-        if (!visited[current]) {
-            if (findCycle(g, current, visited, u)) {
+bool findCycle(Graph *g, int u, bool *visited, bool *recStack) {
+    if (visited[u] == false) {
+        visited[u] = true;
+        recStack[u] = true;
+        for (int i =0; i < g->edges[u].size(); i++) {
+            int current = g->edges[u][i];
+            if (!visited[current] && findCycle(g, current, visited, recStack)) {
+                return true;
+            } else if (recStack[current]) {
                 return true;
             }
-        } else if (current != parent) {
-            return true;
         }
     }
+    recStack[u] = false;
     return false;
 }
 bool hasCycle(Graph *g) {
     bool *visited = new bool[g->nV];
+    bool *recStack = new bool[g->nV];
     for (int i = 0; i < g->nV; i++) {
         visited[i] = false;
+        recStack[i] = false;
     }
     for (int i = 0; i < g->nV; i++) {
-        if (!visited[i]) {
-            if (findCycle(g, i, visited, -1)) {
-                return true;
-            }
+        if (findCycle(g, i, visited, recStack)) {
+            return true;
         }
     }
     return false;
