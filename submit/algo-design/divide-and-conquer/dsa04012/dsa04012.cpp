@@ -25,6 +25,13 @@ void testCase() {
     for (int i = 0; i < m; i++) {
         cin >> b[i];
     }
-    vector<int> res (m + n - 1, 0);
-    
+    vector<int> res (n + m - 1, 0);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            res[i + j] += a[i] * b[j];
+        }
+    }
+    for (int i = 0; i < res.size(); i++) {
+        cout << res[i] << " ";
+    }
 }

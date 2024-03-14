@@ -14,6 +14,10 @@ bool evenDeg(Graph *g, int v);
 int hasEulerCircuit(Graph *g);
 int main() {
     // Write your code here
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif
     int t;
     cin >> t;
     while (t--) {
