@@ -1,42 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int remainder(string t, int n) {
-    int rem = 0;
-    for (int i = 0; i < t.size(); i++)
-        rem = (rem*10 + (t[i]-'0')) % n;
-    return rem;
-}
 
-string bfs(int n) {
-    queue<string> q;
-    set<int> visit;
-
-    string t = "9";
-    q.push(t);
-
-    while (!q.empty()) {
-        t = q.front(); q.pop();
-
-        int rem = remainder(t, n);
-        if (rem == 0)
-            return t;
-
-        if(visit.find(rem) == visit.end()) {
-            visit.insert(rem);
-            q.push(t + "0");
-            q.push(t + "9");
-        }
-    }
-}
-
+string findNum(int n);
 int main() {
-    int T;
-    cin >> T;
-    while (T--) {
-        int N;
-        cin >> N;
-        cout << bfs(N) << endl;
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        cout << findNum(n) << endl;
     }
     return 0;
 }
+string findNum(int n) {
+    queue<string> q;
+    q.push("9");
+    while (true) {
+        string s = q.front();
+        q.pop();
+        int x = 0;
+        for (int i = 0; i < s.size(); i++) {
+            x = x * 10 + (s[i] - '0');
+            x %= n;
+        }
+        if (x == 0) {
+            return s;
+        }
+        q.push(s + "0");
+        q.push(s + "9");
+    }
+}   
