@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+// y tuong, tai 1 vi tri tim ra diem gan nhat, gia tri lon nhat nho hon no
 void testCase();
 int main() {
     // Write your code here
@@ -18,42 +19,41 @@ int main() {
 void testCase() {
     int n;
     cin >> n;
-    int a[n + 1], gr[n + 1], le[n + 1];
+    int a[n + 1], l[n + 1], r[n + 1];
     for (int i = 1; i <= n; i++) {
         cin >> a[i];
     }
     stack<int> st;
-    for (int i = n; i >= 1; i--) {
-        while (!st.empty() && a[st.top()] <= a[i]) {
+    for(int i=  1; i <= n; i++) {
+        while (!st.empty() && a[st.top()] >= a[i]) {
             st.pop();
         }
         if (st.empty()) {
-            gr[i] = -1;
+            l[i] = 1;
         } else {
-            gr[i] = st.top();
+            l[i] = st.top() + 1;
         }
-        st.push(i);//push index cua so lon hon dau tien ben phai cua a[i]
+        st.push(i);
     }
     while (!st.empty()) {
-        st.pop();//clear stack
+        st.pop();
     }
     for (int i = n; i >= 1; i--) {
-        while (!st.empty() && st.top() >= a[i]) {
+        while (!st.empty() && a[st.top()] >= a[i]) {
             st.pop();
         }
         if (st.empty()) {
-            le[i] = -1;
+            r[i] = n;
         } else {
-            le[i] = st.top();
+            r[i] = st.top() - 1;
         }
-        st.push(a[i]);//push so nho hon dau tien ben phai cua a[i]
+        st.push(i);
     }
+    long long res = 0;
     for (int i = 1; i <= n; i++) {
-        if (gr[i] == -1) {
-            cout << -1;
-        } else {
-            cout << le[gr[i]];
-        }
-        cout << " ";
+        long long s = (long long) a[i] * (r[i] - l[i] + 1);
+        res = max(res, s);
     }
+    cout << res;
+
 }

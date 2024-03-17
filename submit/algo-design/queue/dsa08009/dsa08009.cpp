@@ -1,36 +1,49 @@
-#include<bits/stdc++.h>
+// https://code.ptit.edu.vn/student/question/DSA08009
+// BIẾN ĐỔI S – T
+
+#include <bits/stdc++.h>
 using namespace std;
 
-int minOperations(int S, int T) {
-    queue<int> q;
-    unordered_map<int, int> dist;
-    q.push(T);
-    dist[T] = 0;
+void testCase() {
+    int s, t;
+    cin >> s >> t;
+    queue<pair<int, int>> q;
+    map<int, bool> mp;
+    q.push({s, 0});
     while (!q.empty()) {
-        int cur = q.front();
-        q.pop();
-        if (cur == S) {
-            return dist[cur];
+        pair<int, int> p = q.front(); q.pop();
+        if (p.first == t) {
+            cout << p.second;
+            return;
         }
-        if (cur % 2 == 0 && dist.find(cur / 2) == dist.end()) {
-            q.push(cur / 2);
-            dist[cur / 2] = dist[cur] + 1;
+        if (p.first - 1 == t || p.first * 2 == t) {
+            cout << p.second + 1;
+            return;
         }
-        if (cur < S && dist.find(cur + 1) == dist.end()) {
-            q.push(cur + 1);
-            dist[cur + 1] = dist[cur] + 1;
+
+
+        if (p.first * 2 <= t * 2 && mp[p.first * 2] == 0) {
+            q.push({p.first * 2, p.second + 1});
+            mp[p.first * 2] = 1;
+        }
+        if (p.first - 1 >= 0 && mp[p.first - 1] == 0) {
+            q.push({p.first - 1, p.second + 1});
+            mp[p.first - 1] = 1;
         }
     }
-    return -1;
 }
 
 int main() {
-    int T;
-    cin >> T;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif
+    int T = 1; cin >> T;
     while (T--) {
-        int S, T;
-        cin >> S >> T;
-        cout << minOperations(S, T) << endl;
+        testCase();
+        cout << "\n";
     }
     return 0;
 }
