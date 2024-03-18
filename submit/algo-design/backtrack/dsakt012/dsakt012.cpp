@@ -9,10 +9,10 @@ void testCase();
 void Try(int sum_money, int lim, int cnt);
 int main() {
     // Write your code here
-    #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-    #endif
+    // #ifndef ONLINE_JUDGE
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+    // #endif
     testCase();
     return 0;
 }

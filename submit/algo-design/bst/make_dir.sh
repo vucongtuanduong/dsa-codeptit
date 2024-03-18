@@ -21,10 +21,10 @@ if [ -d "$1" ]; then
     echo "" >> $filename
     echo "int main() {" >> $filename
     echo "    // Write your code here" >> $filename
-    echo "    #ifndef ONLINE_JUDGE" >> $filename
-    echo "    freopen(\"input.txt\", \"r\", stdin);" >> $filename
-    echo "    freopen(\"output.txt\", \"w\", stdout);" >> $filename
-    echo "    #endif" >> $filename
+    # echo "    #ifndef ONLINE_JUDGE" >> $filename
+    # echo "    freopen(\"input.txt\", \"r\", stdin);" >> $filename
+    # echo "    freopen(\"output.txt\", \"w\", stdout);" >> $filename
+    # echo "    #endif" >> $filename
     echo "    return 0;" >> $filename
     echo "}" >> $filename
 
@@ -40,10 +40,10 @@ else
     echo "" >> $1.cpp
     echo "int main() {" >> $1.cpp
     echo "    // Write your code here" >> $1.cpp
-    echo "    #ifndef ONLINE_JUDGE" >> $1.cpp
-    echo "    freopen(\"input.txt\", \"r\", stdin);" >> $1.cpp
-    echo "    freopen(\"output.txt\", \"w\", stdout);" >> $1.cpp
-    echo "    #endif" >> $1.cpp
+    # echo "    #ifndef ONLINE_JUDGE" >> $1.cpp
+    # echo "    freopen(\"input.txt\", \"r\", stdin);" >> $1.cpp
+    # echo "    freopen(\"output.txt\", \"w\", stdout);" >> $1.cpp
+    # echo "    #endif" >> $1.cpp
     echo "    return 0;" >> $1.cpp
     echo "}" >> $1.cpp
 
