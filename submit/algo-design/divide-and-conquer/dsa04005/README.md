@@ -61,3 +61,14 @@ int main() {
 
 Time Complexity Analysis:
 The time complexity of this solution is O(N) for each test case because we are recursively dividing the string into two halves until we find the `i-th` character. The total time complexity is O(T*N) where T is the number of test cases and N is the maximum string index.
+
+## Explain code:
+This code is generating Fibonacci numbers and storing them in the `fib` vector until it has `N+1` elements (indexed from 0 to N).
+
+Here's a breakdown of what each line does:
+
+- `while (fib.size() <= N)`: This loop continues as long as the size of the `fib` vector is less than or equal to `N`.
+
+- `fib.push_back(fib.back() + *(fib.end() - 2))`: This line adds a new element to the end of the `fib` vector. The new element is the sum of the last element in the vector (`fib.back()`) and the second-to-last element in the vector (`*(fib.end() - 2)`). This is the definition of a Fibonacci sequence, where each number is the sum of the previous two numbers.
+
+So, if `N` is 5 and `fib` initially contains `{0, 1, 1}`, after this code runs, `fib` will contain `{0, 1, 1, 2, 3, 5}`, which are the first 6 Fibonacci numbers.
