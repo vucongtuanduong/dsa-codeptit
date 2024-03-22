@@ -1,18 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n, a[101], k;
-int x
+bool ok = true;
 void init();
-bool isFinal();
 void result();
 void genNext();
 int main () {
     init();
-    while (!isFinal()) {
+    while (ok) {
         result();
         genNext();
     }
-    result();
     return 0;
 }
 void init() {
@@ -22,14 +20,6 @@ void init() {
     }
     
 }
-bool isFinal() {
-    for (int i = 1; i <= k; i++) {
-        if (a[i] != (n - k + i)) {
-            return false;
-        }
-    }
-    return true;
-}
 void result() {
     for (int i = 1; i <= k; i++) {
         cout << a[i] << " ";
@@ -38,8 +28,12 @@ void result() {
 }
 void genNext() {
     int t = k;
-    while (a[t] == (n - k + t)) {
+    while (t > 0 && a[t] == (n - k + t)) {
         t--;
+    }
+    if (t <= 0) {
+        ok = false;
+        return;
     }
     a[t] ++;
     for (int i = t + 1; i <= k; i++) {
