@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, a[101], k;
+int n, a[101], k, countRes;
 int x[101];
 void init();
 bool isFinal();
@@ -14,9 +14,11 @@ int main () {
         genNext();
     }
     result();
+    cout << countRes;
     return 0;
 }
 void init() {
+    countRes = 0;
     for (int i = 1; i <= n; i++) {
         a[i] = 0;
     }
@@ -41,6 +43,7 @@ void result() {
         }
     }
     if (sum == k) {
+        countRes++;
         for (int i = 1; i <= n; i++) {
             if (a[i] == 1) {
                 cout << x[i] << " ";
