@@ -6,15 +6,31 @@ void init();
 void display();
 void genNext();
 bool isFinal();
+bool check(int x);
+bool check1();
 int main () {
     init();
-    cout << c;
-    // while (!isFinal()) {
-    //     display();
-    //     genNext();
-    // }
-    // display();
+    while (!isFinal()) {
+        display();
+        genNext();
+    }
+    display();
     return 0;
+}
+bool check1() {
+    for (int i = 1; i <= n; i++) {
+        if (a[i] == 1 || a[i] == 5) {
+            if (i > 1 && i < n && check(a[i -1]) && check(a[i + 1])) {
+                return false;
+            }
+        }
+        
+        
+    }
+    return true;
+}
+bool check(int x) {
+    return (x != 1) && (x != 5);
 }
 void genNext() {
     int j = n - 1;
@@ -42,10 +58,14 @@ bool isFinal() {
     return true;
 }
 void display() {
-    for (int i = 1; i <= n; i++) {
-        cout << a[i] << " ";
+    
+    if (check1()) {
+        for (int i = 1; i <= n; i++) {
+            cout << (char)(a[i] + 'A' - 1) ;
+        }
+        cout << endl;
     }
-    cout << endl;
+    
 }
 void init() {
     cin >> c;
