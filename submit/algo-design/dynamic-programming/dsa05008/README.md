@@ -52,3 +52,18 @@ int main() {
 ```
 
 4. **Analyse time complexity:** The time complexity of this solution is O(n*S), where `n` is the number of elements in the array and `S` is the target sum. This is because we are processing each sum from `1` to `S` for each of the `n` elements. The space complexity is also O(n*S) because we are storing the DP table of size `n+1` by `S+1`.
+
+
+
+### dsa05008_2 explain
+Your code is solving the problem by using a dynamic programming approach. Here's a detailed explanation:
+
+1. **Input Reading:** The code first reads the number of test cases `t`. For each test case, it reads the number of elements `n` and the target sum `k`, and then reads the elements of the array `a`.
+
+2. **Dynamic Programming Initialization:** The code initializes a DP array `sum` of size `k + 1` with all elements set to `0`, except `sum[0]` which is set to `1`. This is because there is always an empty subset with sum `0`.
+
+3. **Dynamic Programming Calculation:** The code then fills up the DP array. For each element `a[i]` of the array, it iterates over the DP array from `k` to `a[i]` in reverse order. If `sum[j - a[i]]` is `1`, it sets `sum[j]` to `1`. This means that if there is a subset with sum `j - a[i]`, then there is also a subset with sum `j` (by including `a[i]` in the subset).
+
+4. **Result Output:** Finally, the code checks `sum[k]`. If it is `1`, it prints `YES`, meaning there is a subset with sum `k`. Otherwise, it prints `NO`, meaning there is no such subset.
+
+This algorithm works because it considers all possible subsets by including or excluding each element, and checks if there is a subset with sum `k`. The time complexity of this algorithm is O(n*k), where `n` is the number of elements and `k` is the target sum. This is because it processes each sum from `k` to `a[i]` for each of the `n` elements. The space complexity is O(k), as it uses a DP array of size `k + 1`.
