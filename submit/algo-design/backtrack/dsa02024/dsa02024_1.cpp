@@ -1,18 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+void Try(vector<int> a, vector<string>&res, int start, string s, int count);
 void testCase();
-void Try(vector<int> a, vector<int>&res, int start);
+
 int main() {
-    // Write your code here
-    // int t;
-    // cin >> t;
-    // while (t--) {
-    //     testCase();
-    //     cout << endl;
-    // }
     testCase();
     return 0;
 }
+
 void testCase() {
     int n;
     cin >> n;
@@ -20,21 +16,25 @@ void testCase() {
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    // sort(a.begin(), a.end());
-    vector<int> res;
-    Try(a, res, 0);
+    vector<string> res;
+    for (int i = 0; i < n; i++) {
+        Try(a, res, i, to_string(a[i]) + " ", 1);
+    }
+    sort(res.begin(), res.end());
+    for (int i = 0; i < res.size(); i++) {
+        cout << res[i] << endl;
+    }
 }
-void Try(vector<int> a, vector<int>&res, int start) {
-    if (res.size() > 1 ) {
-        for (int i = 0; i < res.size(); i++) {
-            cout << res[i] << " ";
-        }
-        cout << endl;
-    } else {
-        for (int i = start; i < a.size(); i++) {
-            res.push_back(a[i]);
-            Try(a, res, i + 1);
-            res.pop_back();
+
+void Try(vector<int> a, vector<string>&res, int start, string s, int count) {
+    for (int j = start + 1; j < a.size(); j++) {
+        if (a[start] < a[j]) {
+            string new_s = s + to_string(a[j]) + " ";
+            int new_count = count + 1;
+            if (new_count > 1) {
+                res.push_back(new_s);
+            }
+            Try(a, res, j, new_s, new_count);
         }
     }
 }
