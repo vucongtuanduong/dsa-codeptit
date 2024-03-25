@@ -13,5 +13,19 @@ int main() {
     return 0;
 }
 void testCase() {
-
+    int n, k;
+    cin >> n >> k;
+    vector<long long> dp(n + 1, 0);
+    dp[0] = 1;
+    dp[1] = 1;
+    for (int i = 2; i <= n; i++) {
+        for (int j = i - k; j <= i - 1; j++) {
+            if (j >= 0) {
+                dp[i] = (dp[i] + dp[j]) % MOD;
+                dp[i] %= MOD;
+            }
+            
+        }
+    }
+    cout << dp[n];
 }
