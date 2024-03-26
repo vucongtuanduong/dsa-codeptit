@@ -19,6 +19,7 @@ Otherwise, perform the union operation by setting the representative of u's set 
 If no cycle is found after processing all edges, return "NO."
 
 Implementation in C++:
+```cpp
 #include <iostream>
 
 #include <vector>
@@ -118,6 +119,7 @@ int main() {
     return 0;
 
 }
+```
 Time Complexity Analysis:
 Building the Disjoint Set data structure takes O(V) time.
 
