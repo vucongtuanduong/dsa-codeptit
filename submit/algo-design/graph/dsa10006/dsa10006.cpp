@@ -6,22 +6,23 @@ struct Graph{
     vector<vector<int>> edges;
 };
 void testCase();
-void dfs(Graph *g, int start, vector<bool> &visited);
+void dfs(Graph *g, int start, vector<pair<int,int>> &spanningTree);
 int main() {
     // Write your code here
     int t;
     cin >> t;
     while (t--) {
         testCase();
-        cout << endl;
+        // cout << endl;
     }
     return 0;
 }
-void dfs(Graph *g, int start, vector<bool> &visited) {
+void dfs(Graph *g, int start, vector<pair<int,int>> &spanningTree) {
+    vector<bool> visited(g->nV, false);
     visited[start] = true;
     stack<int> st;
     st.push(start);
-    while(!st.empty()) {
+    while (!st.empty()) {
         int u = st.top();
         st.pop();
         for (int v : g->edges[u]) {
@@ -29,13 +30,16 @@ void dfs(Graph *g, int start, vector<bool> &visited) {
                 st.push(u);
                 st.push(v);
                 visited[v] = true;
-            } 
+                // cout << u + 1 << ", " << v + 1 << endl;
+                spanningTree.push_back(make_pair(u, v));
+                break;
+            }
         }
     }
 }
 void testCase() {
-    int nV , nE;
-    cin >> nV >> nE;
+    int nV, nE, start;
+    cin >> nV >> nE >> start;
     Graph *g = new Graph;
     g->nV = nV;
     g->nE = nE;
@@ -46,14 +50,13 @@ void testCase() {
         g->edges[u - 1].push_back(v - 1);
         g->edges[v - 1].push_back(u - 1);
     }
-    for (int i = 0; i < g->nV; i++) {
-        vector<bool> visited(g->nV, false);
-        visited[i] = true;
-        dfs(g, i, visited);
-        if (count(visited.begin(), visited.end(), true) != g->nV) {
-            cout << "0";
-            return;
+    vector<pair<int, int>> spanningTree;
+    dfs(g, start - 1, spanningTree);
+    if (spanningTree.size() != g->nV - 1) {
+        cout << "-1\n";
+    } else {
+        for (auto x : spanningTree) {
+            cout << x.first + 1 << " " << x.second + 1 << endl;
         }
     }
-    cout << "1";
 }
