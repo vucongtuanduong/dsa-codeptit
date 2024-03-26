@@ -17,6 +17,7 @@ We continue this process until there are V-1 edges in the MST (where V is the nu
 The resulting set of edges forms the Minimum Spanning Tree.
 
 Implementation in C++:
+```cpp
 #include <iostream>
 
 #include <vector>
@@ -162,6 +163,7 @@ int main() {
     return 0;
 
 }
+```
 Time Complexity Analysis:
 Sorting the edges takes O(E log E) time.
 
