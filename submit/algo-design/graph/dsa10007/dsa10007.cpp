@@ -6,7 +6,7 @@ struct Graph{
     vector<vector<int>> edges;
 };
 void testCase();
-void dfs(Graph *g, int start, vector<pair<int,int>> &spanningTree);
+void bfs(Graph *g, int start, vector<pair<int,int>> &spanningTree);
 int main() {
     // Write your code here
     int t;
@@ -17,22 +17,19 @@ int main() {
     }
     return 0;
 }
-void dfs(Graph *g, int start, vector<pair<int,int>> &spanningTree) {
+void bfs(Graph *g, int start, vector<pair<int,int>> &spanningTree) {
     vector<bool> visited(g->nV, false);
     visited[start] = true;
-    stack<int> st;
-    st.push(start);
-    while (!st.empty()) {
-        int u = st.top();
-        st.pop();
+    queue<int> q;
+    q.push(start);
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
         for (int v : g->edges[u]) {
             if (!visited[v]) {
-                st.push(u);
-                st.push(v);
+                q.push(v);
                 visited[v] = true;
-                // cout << u + 1 << ", " << v + 1 << endl;
                 spanningTree.push_back(make_pair(u, v));
-                break;
             }
         }
     }
@@ -51,7 +48,7 @@ void testCase() {
         g->edges[v - 1].push_back(u - 1);
     }
     vector<pair<int, int>> spanningTree;
-    dfs(g, start - 1, spanningTree);
+    bfs(g, start - 1, spanningTree);
     if (spanningTree.size() != g->nV - 1) {
         cout << "-1\n";
     } else {

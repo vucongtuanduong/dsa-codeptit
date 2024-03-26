@@ -3,8 +3,9 @@ using namespace std;
 struct Graph{
     int nV;
     int nE;
-    vector<vector<int>> edges;
+    vector<int>edges[1001];
 };
+bool ok;
 void testCase();
 void dfs(Graph *g, int start, vector<bool> &visited);
 int main() {
@@ -17,29 +18,29 @@ int main() {
     }
     return 0;
 }
-void dfs(Graph *g, int start, vector<bool> &visited) {
-    visited[start] = true;
-    stack<int> st;
-    st.push(start);
-    while(!st.empty()) {
-        int u = st.top();
-        st.pop();
-        for (int v : g->edges[u]) {
-            if (!visited[v]) {
-                st.push(u);
-                st.push(v);
-                visited[v] = true;
-            } 
+void dfs(Graph *g, int start, vector<bool> &visited, int count) {
+    if (count == g->nV) {
+        ok = true;
+    }
+    if (ok){
+        return;
+    }
+    for (int v : g->edges[start]) {
+        if (!visited[v]) {
+            visited[v] = true;
+            dfs(g, v, visited, count + 1);
+            if (ok) return;  // Add this line
+            visited[v] = false;
         }
     }
 }
 void testCase() {
+    ok = false;
     int nV , nE;
     cin >> nV >> nE;
     Graph *g = new Graph;
     g->nV = nV;
     g->nE = nE;
-    g->edges.resize(g->nV);
     for (int i = 0; i < nE; i++) {
         int u, v;
         cin >> u >> v;
@@ -49,11 +50,11 @@ void testCase() {
     for (int i = 0; i < g->nV; i++) {
         vector<bool> visited(g->nV, false);
         visited[i] = true;
-        dfs(g, i, visited);
-        if (count(visited.begin(), visited.end(), true) != g->nV) {
-            cout << "0";
+        dfs(g, i, visited, 1);
+        if (ok) {
+            cout << "1";
             return;
         }
     }
-    cout << "1";
+    cout << "0";
 }
