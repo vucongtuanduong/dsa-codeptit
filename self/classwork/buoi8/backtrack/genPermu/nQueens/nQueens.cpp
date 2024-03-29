@@ -25,7 +25,7 @@ void result() {
         cout << "(" << i << ", " << x[i] << ") ";
         
     }
-    // cout << endl;
+    cout << endl;
 }
 void init() {
     cin >> n;
