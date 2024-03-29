@@ -15,7 +15,7 @@ int main () {
     while (t--) {
         init();
         Try(1);
-        cout << res;
+        cout << res << endl;
     }
     
     return 0;
