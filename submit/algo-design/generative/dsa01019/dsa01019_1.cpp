@@ -68,7 +68,6 @@ void testCase() {
     init();
     while(ok) {
         if (check()) {
-            cout << "display()" << endl;
             display();
         }
         genNext();
