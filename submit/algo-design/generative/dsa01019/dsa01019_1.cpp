@@ -47,8 +47,9 @@ void display() {
 void genNext() {
     int i = n;
     while (i > 0 && a[i] == 1) {
-        i--;
+        
         a[i] = 0;
+        i--;
     }
     if (i > 0) {
         a[i] = 1;
