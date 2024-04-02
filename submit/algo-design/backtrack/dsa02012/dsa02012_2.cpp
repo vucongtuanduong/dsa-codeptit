@@ -11,6 +11,22 @@ int gridWays(int i, int j, int n, int m) {
     int ans = gridWays(i + 1, j, n, m) + gridWays(i,j + 1, n, m) ;
     return ans;
 }
+int gridWaysMath(int n, int m) {
+    int x = n + m - 2;
+    int res = 1;
+    for (int i = 2; i <= x; i++) {
+        res *= i;
+    }   
+    int tempN = 1, tempM = 1;
+    for (int i = 2; i <= n - 1; i++) {
+        tempN *= i;
+    }
+    for (int i = 2; i <= m - 1; i++) {
+        tempM *= i;
+    }
+    res /= (tempM * tempN);
+    return res;
+}
 int main() {
     // Write your code here
     int t;
