@@ -11,6 +11,15 @@ void insertAtBottom(stack<int> &s, int data) {
     insertAtBottom(s, data);
     s.push(temp);
 }
+void reverse(stack<int> &s) {
+    if (s.empty()) {
+        return;
+    }
+    int t= s.top();
+    s.pop();
+    reverse(s);
+    insertAtBottom(s, t);
+}
 int main() {
     // Write your code here
     stack<int> s;
@@ -18,7 +27,7 @@ int main() {
     s.push(2);
     s.push(3);
     s.push(4);
-    insertAtBottom(s, 5);
+    reverse(s);
     while (!s.empty()) {
         cout << s.top() << " ";
         s.pop();
