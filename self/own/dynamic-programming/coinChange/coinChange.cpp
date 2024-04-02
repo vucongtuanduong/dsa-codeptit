@@ -6,5 +6,13 @@ given an array of coin denominations, and ingeger M representing target money, f
 */
 int main() {
     // Write your code here
+    int n;
+    cin >> n;
+    int coin[n];
+    for (int i = 0; i < n; i++) {
+        cin >> coin[i];
+    }
+    int money;
+    cin >> money;
     return 0;
 }
