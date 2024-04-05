@@ -20,7 +20,8 @@ int main() {
 }
 bool cmp(pair<int,int>a, pair<int,int> b) {
     double x = (1.0 * a.second )/ (a.first);
-    double y = (1.0 * (a.second)) / (a.first);
+    double y = (1.0 * (b.second)) / (b.first);
+    return y > x;
 }
 void Try(int i) {
     for (int j = 1; j >= 0; j--) {
@@ -54,6 +55,7 @@ void init() {
     for (int i = 0; i < n; i++) {
         cin >> a[i].second;
     }
+    sort(a.begin(), a.end(), cmp);
 }
 void testCase() {
     init();
