@@ -1,7 +1,1 @@
-Enter n: 
-Enter b: 
-Enter weights: 
-Enter values: 
-Optimal value: 14
-Selected items: 
-0 1 1 1 0 1 0 0 0 0 0 1 0 0 0 
+14

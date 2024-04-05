@@ -1,15 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n, v;
-vector<pair<int,int>>a;
+vector<pair<int,int>> a;
 vector<int> x;
 int res, deltak, bk, gk;
 void testCase();
 void init();
 void Try(int i);
-bool cmp(pair<int,int>a, pair<int,int> b);
+bool cmp(pair<int,int> a, pair<int,int> b);
 int main() {
-    // Write your code here
     int t;
     cin >> t;
     while (t--) {
@@ -18,7 +17,7 @@ int main() {
     }
     return 0;
 }
-bool cmp(pair<int,int>a, pair<int,int> b) {
+bool cmp(pair<int,int> a, pair<int,int> b) {
     double x = (1.0 * a.second )/ (a.first);
     double y = (1.0 * (b.second)) / (b.first);
     return y < x;
@@ -28,6 +27,11 @@ void Try(int i) {
         x[i] = j;
         deltak = deltak + x[i] * a[i].second;
         bk = bk - x[i] * a[i].first;
+        // cout << bk << endl;
+        // for (int k = 0; k < n; k++) {
+        //     cout << x[k] << " ";
+        // }
+        // cout << endl;
         if (i == n - 1) {
             if (bk >= 0) {
                 res = max(res, deltak);
@@ -56,13 +60,12 @@ void init() {
         cin >> a[i].second;
     }
     sort(a.begin(), a.end(), cmp);
-    // for (auto x : a) {
-    //     cout << x.second << " " << x.first << endl;
+    // for (auto p : a) {
+    //     cout << p.second << " " << p.first << endl;
     // }
 }
 void testCase() {
     init();
     Try(0);
-
     cout << res;
 }
