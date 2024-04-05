@@ -21,7 +21,7 @@ int main() {
 bool cmp(pair<int,int>a, pair<int,int> b) {
     double x = (1.0 * a.second )/ (a.first);
     double y = (1.0 * (b.second)) / (b.first);
-    return y > x;
+    return y < x;
 }
 void Try(int i) {
     for (int j = 1; j >= 0; j--) {
@@ -30,10 +30,10 @@ void Try(int i) {
         bk = bk - x[i] * a[i].first;
         if (i == n - 1) {
             if (bk >= 0) {
-                res = deltak;
+                res = max(res, deltak);
             }
         } else {
-            gk = deltak + bk * a[i + 1].second / a[i + 1].first;
+            gk = deltak + (1.0 * bk * a[i + 1].second) / (a[i + 1].first);
             if (gk > res && bk > 0) {
                 Try(i + 1);
             }
@@ -56,9 +56,13 @@ void init() {
         cin >> a[i].second;
     }
     sort(a.begin(), a.end(), cmp);
+    // for (auto x : a) {
+    //     cout << x.second << " " << x.first << endl;
+    // }
 }
 void testCase() {
     init();
     Try(0);
+
     cout << res;
 }
