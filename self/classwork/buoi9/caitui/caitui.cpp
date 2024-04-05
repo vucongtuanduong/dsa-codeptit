@@ -1,13 +1,15 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 int n, v;
-vector<pair<int,int>> a;
+vector<pair<int, int>> a;
 vector<int> x;
 int res, deltak, bk, gk;
 void testCase();
 void init();
 void Try(int i);
-bool cmp(pair<int,int> a, pair<int,int> b);
+bool cmp(const pair<int, int> &a, const pair<int, int> &b);
 int main() {
     int t;
     cin >> t;
@@ -17,9 +19,9 @@ int main() {
     }
     return 0;
 }
-bool cmp(pair<int,int> a, pair<int,int> b) {
-    double x = (1.0 * a.second )/ (a.first);
-    double y = (1.0 * (b.second)) / (b.first);
+bool cmp(const pair<int, int> &a, const pair<int, int> &b) {
+    double x = static_cast<double>(a.second) / a.first;
+    double y = static_cast<double>(b.second) / b.first;
     return y < x;
 }
 void Try(int i) {
@@ -27,23 +29,21 @@ void Try(int i) {
         x[i] = j;
         deltak = deltak + x[i] * a[i].second;
         bk = bk - x[i] * a[i].first;
-        // cout << bk << endl;
-        // for (int k = 0; k < n; k++) {
-        //     cout << x[k] << " ";
-        // }
-        // cout << endl;
+        if (bk < 0) {
+            bk += x[i] * a[i].first;
+            deltak -= x[i] * a[i].second;
+            continue;
+        }
         if (i == n - 1) {
-            if (bk >= 0) {
-                res = max(res, deltak);
-            }
+            res = max(res, deltak);
         } else {
-            gk = deltak + (1.0 * bk * a[i + 1].second) / (a[i + 1].first);
-            if (gk > res && bk > 0) {
+            gk = deltak + static_cast<double>(bk * a[i + 1].second) / a[i + 1].first;
+            if (gk > res) {
                 Try(i + 1);
             }
         }
-        deltak = deltak - x[i] * a[i].second;
-        bk = bk + x[i] * a[i].first;
+        deltak -= x[i] * a[i].second;
+        bk += x[i] * a[i].first;
     }
 }
 void init() {
@@ -60,12 +60,9 @@ void init() {
         cin >> a[i].second;
     }
     sort(a.begin(), a.end(), cmp);
-    // for (auto p : a) {
-    //     cout << p.second << " " << p.first << endl;
-    // }
 }
 void testCase() {
     init();
     Try(0);
-    cout << res;
+    cout << res << endl;
 }
