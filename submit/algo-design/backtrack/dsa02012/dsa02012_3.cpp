@@ -1,12 +1,12 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 using namespace std;
-int n;
-vector<vector<int>>a;
-vector<string>res;
+int n, m;
+vector<vector<int>> a(105, vector<int>(105));
+int res;
 void testCase();
-void Try(int i, int j, string s);
+void Try(int i, int j);
 int main() {
-    // Write your code here
     int t;
     cin >> t;
     while (t--) {
@@ -15,38 +15,27 @@ int main() {
     }
     return 0;
 }
-void Try(int i, int j, string s) {
-    if (i == n - 1 && j == n - 1) {
-        res.push_back(s);
+void Try(int i, int j) {
+    if (i == n - 1 && j == m - 1) {
+        res++;
         return;
     }
-    if (i + 1 < n && a[i + 1][j] == 1) {
-        Try(i + 1, j, s + "D");
+    if (i + 1 < n) {
+        Try(i + 1, j);
     } 
-    if (j + 1 < n && a[i][j + 1] == 1) {
-        Try(i, j + 1, s + "R");
+    if (j + 1 < m) {
+        Try(i, j + 1);
     }
 }
 void testCase() {
-    cin >> n;
-    res.clear();
-    a.resize(n, vector<int>(n));
+    cin >> n >> m;
+    res = 0;
+    // a.resize(n, vector<int>(m)); // Resize using m for columns
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
+        for (int j = 0; j < m; j++) {
             cin >> a[i][j];
         }
     }
-    if (a[0][0] == 0 || a[n - 1][n - 1] == 0) {
-        cout << "-1";
-        return;
-    }
-    Try(0, 0, "");
-    if (res.size() == 0) {
-        cout << "-1";
-    } else {
-        sort(res.begin(), res.end());
-        for (auto x : res) {
-            cout << x << " ";
-        }
-    }
+    Try(0, 0);
+    cout << res;
 }
