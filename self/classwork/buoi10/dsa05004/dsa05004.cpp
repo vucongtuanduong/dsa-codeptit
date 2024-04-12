@@ -18,6 +18,10 @@ void init(int n, vector<int> &a) {
 }
 void dynamic(vector<int> a) {
     int n = a.size();
+    if (n == 0) {
+        cout << "0";
+        return;
+    }
     vector<int> dp(n, 1);//tao mang dp de luu do dai cua day con tang dai nhat tai moi vi tri thu i
 
     //duyet qua tung phan tu cua day va cap nhat gia tri tai moi vi tri trong day
