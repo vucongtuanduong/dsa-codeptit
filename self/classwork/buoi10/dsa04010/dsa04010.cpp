@@ -4,7 +4,8 @@ int n;
 int a[101];
 void testCase();
 void init();
-void maxSubArray(int l, int r);
+int maxSubArray(int l, int r);
+int maxCrossingSum(int l, int m, int r);
 int main() {
     // Write your code here
     int t;
@@ -21,12 +22,21 @@ void init() {
         cin >> a[i];
     }
 }
-void maxSubArray(int l, int r) {
+int maxCrossingSum(int l, int m, int r) {
+    
+}
+int maxSubArray(int l, int r) {
+    if (l == r) {
+        return a[l];
+    }
     int m = (l + r) / 2;
     int maxLeft = maxSubArray(l, m);
     int maxRight = maxSubArray(m + 1, r);
+    int maxLeftRight = maxCrossingSum(l, m, r);
+    int maxValue = max(maxLeft, max(maxRight, maxLeftRight));
+    return maxValue;
 }
 void testCase() {
     init();
-    maxSubArray();
+    cout << maxSubArray();
 }
