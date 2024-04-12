@@ -19,11 +19,15 @@ void testCase() {
         cin >> a[i];
     }
     sort(a, a + n);
-    string x = "";
-    string y = "";
+    long long x = 0, y = 0;
     int i = 0;
     while (i < n) {
-        x += to_string(a[i]);
+        x = (x * 10) + a[i];
         i++;
+        if (i != n) {
+            y = (y * 10) + a[i];
+            i++;
+        }
     }
+    cout << x + y;
 } 
