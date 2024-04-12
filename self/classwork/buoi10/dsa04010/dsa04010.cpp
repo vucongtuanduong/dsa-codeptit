@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <climits>
 using namespace std;
 int n;
 int a[101];
@@ -7,7 +8,6 @@ void init();
 int maxSubArray(int l, int r);
 int maxCrossingSum(int l, int m, int r);
 int main() {
-    // Write your code here
     int t;
     cin >> t;
     while (t--) {
@@ -23,7 +23,21 @@ void init() {
     }
 }
 int maxCrossingSum(int l, int m, int r) {
-    
+    int sum = 0, leftSum = INT_MIN, rightSum = INT_MIN;
+    for (int i = m; i >= l; i--) {
+        sum += a[i];
+        if (sum > leftSum) {
+            leftSum = sum;
+        }
+    }
+    sum = 0;
+    for (int i = m + 1; i <= r; i++) {
+        sum += a[i];
+        if (sum > rightSum) {
+            rightSum = sum;
+        }
+    }
+    return leftSum + rightSum;
 }
 int maxSubArray(int l, int r) {
     if (l == r) {
@@ -38,5 +52,5 @@ int maxSubArray(int l, int r) {
 }
 void testCase() {
     init();
-    cout << maxSubArray();
+    cout << maxSubArray(0, n - 1);
 }
