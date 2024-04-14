@@ -22,6 +22,7 @@ void testCase() {
         for (int j = i + 1; j <= i + k; j++) {
             if (j < n) {
                 if (v[i] == v[j]) {
+                    // cout << i << " " << j << endl;
                     res++;
                 }
             }
