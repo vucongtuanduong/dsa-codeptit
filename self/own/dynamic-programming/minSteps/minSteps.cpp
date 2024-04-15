@@ -1,19 +1,6 @@
-#include <bits/stdc++.h>
+ #include <bits/stdc++.h>
 using namespace std;
-vector<int>memo;
-void testCase();
-int dp(int n);
-int main() {
-    // Write your code here
-    int t;
-    cin >> t;
-    while (t--) {
-        testCase();
-        cout << endl;
-    }
-    return 0;
-}
-
+int memo[100];
 int dp(int n) {
     if (n == 1) {
         return 0;
@@ -33,9 +20,29 @@ int dp(int n) {
     ans ++;
     return ans;
 }
-void testCase() {
+int minWays(int n) {
+    vector<int> dp(n + 1, INT_MAX);
+    dp[1] = 0;
+    for (int i = 2; i <= n; i++) {
+        if (i % 2 == 0) {
+            dp[i] = min(dp[i], dp[i / 2] + 1);
+        }
+        if (i % 3 == 0) {
+            dp[i] = min(dp[i], dp[i / 3] + 1);
+        }
+        dp[i] = min(dp[i], dp[i - 1] + 1);
+    }
+    // for (int i = 1; i <= n; i++) {
+    //     cout << dp[i] << " ";
+    // }
+    return dp[n];
+}
+int main() {
+    // Write your code here
     int n;
     cin >> n;
-    memo.resize(n + 1, -1);
-    cout << dp(n);
+    memset(memo, -1, sizeof(memo));
+    cout << dp(n) << endl;
+    cout << minWays(n) << endl;
+    return 0;
 }
