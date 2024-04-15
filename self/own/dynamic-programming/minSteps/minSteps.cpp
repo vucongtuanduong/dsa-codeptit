@@ -1,6 +1,19 @@
- #include <bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int memo[100];
+vector<int>memo;
+void testCase();
+int dp(int n);
+int main() {
+    // Write your code here
+    int t;
+    cin >> t;
+    while (t--) {
+        testCase();
+        cout << endl;
+    }
+    return 0;
+}
+
 int dp(int n) {
     if (n == 1) {
         return 0;
@@ -20,11 +33,9 @@ int dp(int n) {
     ans ++;
     return ans;
 }
-int main() {
-    // Write your code here
+void testCase() {
     int n;
     cin >> n;
-    memset(memo, -1, sizeof(memo));
+    memo.resize(n + 1, -1);
     cout << dp(n);
-    return 0;
 }
