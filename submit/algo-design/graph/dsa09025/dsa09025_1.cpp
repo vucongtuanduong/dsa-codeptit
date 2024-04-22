@@ -45,7 +45,7 @@ void testCase() {
     Graph *g = new Graph;
     g->nV = nV;
     g->nE = nE;
-    g->edges.resize(nE);
+    g->edges.resize(nV);
     for (int i = 0; i < nE; i++) {
         int u, v;
         cin >> u >> v;
