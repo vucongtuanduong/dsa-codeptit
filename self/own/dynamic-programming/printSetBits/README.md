@@ -1,0 +1,3 @@
+## printSetBits
+print number of set bits from each number from 1 to n
+eg: n = 10 -> 001 010...

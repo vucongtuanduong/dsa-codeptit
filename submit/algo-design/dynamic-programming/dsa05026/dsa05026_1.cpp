@@ -14,7 +14,7 @@ void testCase() {
         cin >> a[i];
     }
     vector<int> dp(c + 1, 0);
-    for (int i = 0; i < n; i++) {
+    for (int i = 1; j <= n; i++) {
         for (int j = c; j >= a[i]; j--) {
             dp[j] = max(dp[j], dp[j - a[i]] + a[i]);
         }
