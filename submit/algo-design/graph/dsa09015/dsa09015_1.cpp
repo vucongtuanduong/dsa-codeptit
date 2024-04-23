@@ -40,7 +40,7 @@ void testCase() {
         int u, v;
         cin >> u >> v;
         g->edges[u - 1].push_back(v - 1);
-        g->edges[v - 1].push_back(u - 1);
+        // g->edges[v - 1].push_back(u - 1);
         
     }
     if (hasCycle(g)) {
