@@ -4,25 +4,27 @@ struct Graph{
     int nV, nE;
     vector<vector<int>> edges;
 };
-bool dfsHasCycle(Graph *g, int v, int prev, vector<bool> &visited) {
+bool dfsHasCycle(Graph *g, int v, vector<bool> &visited, vector<bool> &onStack) {
     visited[v] = true;
+    onStack[v] = true;
     for (int w : g->edges[v]) {
-        if (w == prev) {
-            continue;
-        }
-        if (visited[w] == true) {
+        if (onStack[w]) {
             return true;
-        } else if (dfsHasCycle(g, w, v, visited)) {
-            return true;
+        } else if (visited[w] == false) {
+            if (dfsHasCycle(g, w, visited, onStack)) {
+                return true;
+            }
         }
     }
+    onStack[v] = false;
     return false;
 }
 bool hasCycle(Graph *g) {
     vector<bool> visited(g->nV, false);
+    vector<bool> onStack(g->nV, false);
     for (int i = 0; i < g->nV; i++) {
         if (!visited[i]) {
-            if (dfsHasCycle(g, i, i, visited)) {
+            if (dfsHasCycle(g, i, visited, onStack)) {
                 return true;
             }
         }
