@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 bool isOpen(char c) {
-    return (c == '(' || c == '{' || c == '{');
+    return (c == '(' || c == '[' || c == '{');
 }
 bool isMatched(char a, char b) {
     return ((a == '(' && b == ')') || (a == '[' && b == ']') || (a == '{' && b == '}'));
@@ -9,22 +9,41 @@ bool isMatched(char a, char b) {
 bool isBalanced(string s) {
     stack<char> st;
     for (int i = 0; i < s.size(); i++) {
-        if (isOpen(s[i])) {
-            st.push(s[i]);
-        } else if (!isalpha(s[i]) && s[i] != ' ') {
-            if (st.empty() || !isMatched(st.top(), s[i])) {
-                return false;
-            }
+        switch(s[i]) {
+            case '(':
+            case '[':
+            case '{':
+                st.push(s[i]);
+                break;
+            case ')':
+                if (st.empty() || st.top() != '(') {
+                    return false;
+                } else {
+                    st.pop();
+                }
+                break;
+            case ']':
+                if (st.empty() || st.top() != '[') {
+                    return false;
+                } else {
+                    st.pop();
+                }
+                break;
+            case '}':
+                if (st.empty() || st.top() != '{') {
+                    return false;
+                } else {
+                    st.pop();
+                }
+                break; 
+            default: continue;
         }
     }
-    if (st.empty()) {
-        return true;
-    }
-    return false;
+    return st.empty();
 }
 void testCase() {
     string s;
-    cin >> s;
+    getline(cin, s);
     if (isBalanced(s)) {
         cout << "YES";
     } else {
@@ -35,6 +54,7 @@ int main() {
     // Write your code here
     int t;
     cin >> t;
+    cin.ignore(); // to ignore the newline character after reading t
     while (t--) {
         testCase();
         cout << endl;
