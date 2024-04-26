@@ -12,17 +12,14 @@ bool check(string s) {
         if (isOpen(s[i])) {
             st.push(s[i]);
         } else {
-            if (isMatch(st.top(), s[i])) {
-                st.pop();
-            } else {
+            if (st.empty() || !isMatch(st.top(), s[i])) {
                 return false;
+            } else {
+                st.pop();
             }
         }
     }
-    if (st.empty()) {
-        return true;
-    }
-    return false;
+    return st.empty();
 }
 void testCase() {
     string s;
