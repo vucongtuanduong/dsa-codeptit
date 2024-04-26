@@ -3,7 +3,7 @@ using namespace std;
 bool checkRedundant(string s) {
     stack<char> st;
     for (char c : s) {
-        if (c != ')') {
+        if (c != ')' && c != ' ') {
             st.push(c);
         } else {
             bool operator_found = false;
@@ -26,17 +26,24 @@ bool checkRedundant(string s) {
 }
 void testCase() {
     string s;
-    cin >> s;
+    getline(cin, s);
+    for (int i = 0; i < s.size(); i++) {
+        if (s[i] == ' ') {
+            s.erase(s.begin() + i);
+        }
+    }
+    // cout << s << ": ";
     if (checkRedundant(s)) {
-        cout << "Contains redundant paranthesis";
+        cout << "Yes";
     } else {
-        cout << "Not contain redundant paranthesis";
+        cout << "No";
     }
 }
 int main() {
     // Write your code here
     int t;
     cin >> t;
+    cin.ignore();
     while (t--) {
         testCase();
         cout << endl;
