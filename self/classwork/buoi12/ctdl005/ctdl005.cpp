@@ -21,7 +21,7 @@ void insert(int new_data) { //insert at tail of the linked list
         head = x;
     } else {
         Node *curr = head;
-        while (curr != NULL) {
+        while (curr->next != NULL) { // stop at the last node
             curr = curr->next;
         }
         curr->next = x;
