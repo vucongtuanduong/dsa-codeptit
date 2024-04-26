@@ -10,6 +10,7 @@ int countRank(char c) {
     }
     return -1;
 }
+//Shunting yard algorithm
 string inFixtoPostFix(string s) {
     stack<char> st;
     string out = "";
