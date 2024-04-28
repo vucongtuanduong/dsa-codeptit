@@ -2,21 +2,22 @@
 using namespace std;
 const string operations = "+-*/";
 string preFixtoPostFix(string s) {
+    string res = "";
     stack<string> st;
-    for (int i = 0; i < s.size(); i++){ 
+    // cout << s << endl;
+    int n = s.size();
+    for (int i = n - 1; i >= 0; i--){ 
         if (operations.find(s[i]) != -1) {
-            st.push(string(1, s[i]));
+            string op1 = st.top();st.pop();
+            string op2 = st.top();st.pop();
+            string new_op = op1 + op2 + s[i];
+            st.push(new_op);
         } else {
-            string op1 = st.top();
-            st.pop();
-            string op2 = st.top();
-            st.pop();
-            string new_op = op2 + s[i] + op1;
-            cout << "new_op: " << new_op << endl;
-            
+            st.push(string(1, s[i]));
         }
     }
-    return "";
+    
+    return st.top();
 }
 void testCase() {
     string s;
