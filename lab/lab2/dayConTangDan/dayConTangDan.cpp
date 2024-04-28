@@ -1,50 +1,40 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n;
-vector<int> a;
-vector<int> x;
-vector<string> res;
-string temp ;
-void result() {
-    if (count(x.begin(), x.end(), 1) >= 2) {
-        for (int i = 0; i < n; i++){ 
-            if (x[i] == 1) {
-                temp += to_string(a[i]) + " ";
-            }
-        }
-        temp.pop_back();
-        res.push_back(temp);
-        temp = "";
-    }
-    
-}
-void Try(int i) {
-    for (int j = 0; j <= 1; j++) {
-        x[i] = j;
-        if (i == n - 1) {
-            result();
-        } else {
-            Try(i + 1);
-        }
-    }
-}
-void testCase() {
-    temp = "";
-    cin >> n;
-    a.resize(n);  
-    x.resize(n);  
-    for(int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-    // sort(a.begin(), a.end());
-    Try(0);
-    sort(res.begin(), res.end());
-    for (auto x : res) {
-        cout << x << endl;
-    }
-}
+
+void Try(vector<int> a, vector<string>&res, int start, string s, int count);
+void testCase();
+
 int main() {
-    // Write your code here
     testCase();
     return 0;
+}
+
+void testCase() {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    vector<string> res;
+    for (int i = 0; i < n; i++) {
+        Try(a, res, i, to_string(a[i]) + " ", 1);
+    }
+    sort(res.begin(), res.end());
+    for (int i = 0; i < res.size(); i++) {
+        cout << res[i] << endl;
+    }
+}
+
+void Try(vector<int> a, vector<string>&res, int start, string s, int count) {
+    for (int j = start + 1; j < a.size(); j++) {
+        if (a[start] < a[j]) {
+            string new_s = s + to_string(a[j]) + " ";
+            int new_count = count + 1;
+            if (new_count > 1) {
+                res.push_back(new_s);
+            }
+            Try(a, res, j, new_s, new_count);
+        }
+    }
 }
