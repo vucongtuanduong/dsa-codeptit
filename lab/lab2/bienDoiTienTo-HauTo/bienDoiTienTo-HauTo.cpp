@@ -11,6 +11,7 @@ string preFixtoPostFix(string s) {
             string op1 = st.top();st.pop();
             string op2 = st.top();st.pop();
             string new_op = op1 + op2 + s[i];
+            // cout << "op1: " << op1 << ", op2: " << op2 << ", new_op: " << new_op << endl;
             st.push(new_op);
         } else {
             st.push(string(1, s[i]));
