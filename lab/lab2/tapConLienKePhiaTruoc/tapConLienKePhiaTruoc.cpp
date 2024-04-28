@@ -47,8 +47,21 @@ void testCase() {
             cout << (n - k + i) << " ";
         }
         return;
+    } else {
+        int i = k;
+        while (i >= 1 && a[i - 1] == a[i] - 1) {
+            i--;
+        }
+        // cout << "i: " << i << endl;
+        a[i]--;
+        for (int j = i + 1; j <= k; j++) {
+            a[j] = a[j - 1] + 1;
+        }
+        for (int j = 1; j <= k; j++) {
+            cout << a[j] << " ";
+        }
     }
-    Try(1);
+    // Try(1);
 }
 int main() {
     // Write your code here
