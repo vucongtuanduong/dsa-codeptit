@@ -3,52 +3,37 @@ using namespace std;
 void testCase() {
     int n, s;
     cin >> n >> s;
-    vector<int> minn(n, 0), maxx(n, 0);
+    string minn = "", maxx = "";
     int i = 0;
-    if (s >= 9 && n == 0) {
+    if (s == 0 && n == 1) {
+        cout << "0 0";
+        return;
+    } else if (s < 1 || s > (9 * n)) {
         cout << "-1 -1";
         return;
     }
-    // if (s <= 9 && n > 1) {
-    //     cout << "-1 -1";
-    //     return;
-    // } 
-    // if (s <= 9 && n == 1) {
-    //     cout << "9 9";
-    //     return;
-    // }
-    if (s > (9 * n)) {
-        cout << "-1 -1";
-        return;
-    }
-    while (s > 0 && i < n) {
+    while (n > 0) {
         if (s >= 9) {
-            maxx[i] = 9;
+            maxx += to_string(9);
             s -= 9;
         } else {
-            maxx[i] = s;
+            maxx += to_string(s);
             s = 0;
         }
-        i++;
+        n--;
     }
     minn = maxx;
     reverse(minn.begin(), minn.end());
-    if (minn[0] == 0) {
-        int j = 0;
-        while (j < n && minn[j] == 0) {
-            j++; 
+    if (minn[0] == '0') {
+            minn[0] = '1';
+            int i = 1;
+            while (minn[i] == '0') {
+                i++;
+            }
+            minn[i] --;
         }
-        minn[j] -= 1;
-
-    }
-    minn[0] = 1;
-    for (int i = 0; i < n; i++) {
-        cout << minn[i];
-    }
-    cout << " ";
-    for (int i = 0; i < n; i++) {
-        cout << maxx[i];
-    }
+    // minn[0] = '1';
+    cout << minn << " " << maxx;
 
 }
 int main() {
