@@ -15,6 +15,13 @@ Node *makeNode (int data) {
     n->right = NULL;
     return n;
 }
+void NLR(Node *root) { //duyet cay theo thu tu truoc
+    if (root != NULL) {
+        cout << root->data << " ";
+        NLR(root->left);
+        NLR(root->right);
+    }
+}
 int main() {
     // Write your code here
     root = makeNode(1);
@@ -30,5 +37,8 @@ int main() {
     node2->right = node5;
     node5->left = node6;
     node5->right = node7;
+    cout << "Duyet cay theo thu tu truoc: ";
+    NLR(root);
+    cout << endl;
     return 0;
 }
