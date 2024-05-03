@@ -6,13 +6,14 @@ void testCase() {
     int n;
     cin >> n;
     q.push("");
-    while (true) {
+    while (!q.empty()) {
         string s = q.front();
         q.pop();
+        st.push(s);
         if (s.size() == n) {
             continue;
         }
-        st.push(s);
+        
         q.push(s + "6");
         q.push(s + "8");
     }
