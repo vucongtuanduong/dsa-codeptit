@@ -22,6 +22,20 @@ void NLR(Node *root) { //duyet cay theo thu tu truoc
         NLR(root->right);
     }
 }
+void LNR(Node *root) {//duyet cay theo thu tu giua
+    if (root != NULL) {
+        LNR(root->left);
+        cout << root->data << " ";
+        LNR(root->right);
+    }
+}
+void LRN(Node *root) { //duyet cay theo thu tu sau
+    if (root != NULL) {
+        LRN(root->left);
+        LRN(root->right);
+        cout << root->data << " ";
+    }
+}
 int main() {
     // Write your code here
     root = makeNode(1);
@@ -39,6 +53,9 @@ int main() {
     node5->right = node7;
     cout << "Duyet cay theo thu tu truoc: ";
     NLR(root);
-    cout << endl;
+    cout << endl << "Duyet cay theo thu tu giua: ";
+    LNR(root);
+    cout << endl << "Duyet cay theo thu tu sau: ";
+    LRN(root);
     return 0;
 }
