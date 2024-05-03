@@ -57,5 +57,6 @@ int main() {
     LNR(root);
     cout << endl << "Duyet cay theo thu tu sau: ";
     LRN(root);
+    cout << endl;
     return 0;
 }
