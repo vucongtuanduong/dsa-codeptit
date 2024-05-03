@@ -36,6 +36,49 @@ void LRN(Node *root) { //duyet cay theo thu tu sau
         cout << root->data << " ";
     }
 }
+Node *search(Node *root, int x) {
+    if (root == NULL) {
+        return root;
+    }
+    if (root->data == x) {
+        return root;
+    }
+    Node *p = search(root->left, x);
+    if (p == NULL) {
+        p = search(root->right, x);
+    }
+    
+}
+void addLeft(Node *root, int x, int y) {
+    Node *p = new Node;
+    Node *q = new Node;
+    p = search(root, x);
+    if (p == NULL) {
+        cout << "Khong the them duoc node la ben trai do khong tim thay node chua gia tri " << x << endl;
+        return;
+    }
+    if (p->left != NULL) {
+        cout << "Khong the them duoc node la ben trai do da co la \n";
+        return;
+    } else {
+        q = makeNode(y);
+        p->left = q;
+    }
+}
+void removeLeft(Node *root, int x) {
+    Node *p = search(root, x);
+    if (p == NULL) {
+        cout << "Khong tim thay node cha x\n";
+        return;
+    } else if (p->left->right != NULL || p->left->left != NULL) {
+        cout << "Khong loai bo duoc do la node trung gian \n";
+        return;
+    } else {
+        Node *q = p->left;
+        p->left = NULL;
+        delete q;
+    }
+}
 int main() {
     // Write your code here
     root = makeNode(1);
@@ -51,6 +94,22 @@ int main() {
     node2->right = node5;
     node5->left = node6;
     node5->right = node7;
+    cout << "Duyet cay theo thu tu truoc: ";
+    NLR(root);
+    cout << endl << "Duyet cay theo thu tu giua: ";
+    LNR(root);
+    cout << endl << "Duyet cay theo thu tu sau: ";
+    LRN(root);
+    cout << endl;
+    addLeft(root, 3, 8);
+    cout << "Duyet cay theo thu tu truoc: ";
+    NLR(root);
+    cout << endl << "Duyet cay theo thu tu giua: ";
+    LNR(root);
+    cout << endl << "Duyet cay theo thu tu sau: ";
+    LRN(root);
+    cout << endl;
+    removeLeft(root, 6);
     cout << "Duyet cay theo thu tu truoc: ";
     NLR(root);
     cout << endl << "Duyet cay theo thu tu giua: ";
