@@ -18,6 +18,7 @@ void testCase() {
             
         }
     }
+    cout << st.size() << endl;
     while (!st.empty()) {
         cout << st.top() << " ";
         st.pop();
