@@ -35,7 +35,24 @@ void NLR(Node *root) {
         NLR(root->right);
     }
 }
+void LRN(Node *root) {
+    if (root != NULL) {
+        LRN(root->left);
+        LRN(root->right);
+        cout << root->data << " ";
+    }
+}
 void testCase() {
+    int n;
+    cin >> n;
+    int a[n];
+    Node *root = NULL;
+    for (int i = 0; i < n ;i++) {
+        cin >> a[i];
+        root = addNodeToTree(root, a[i]);
+    }
+    LRN(root);
+    
     
 }
 int main() {
