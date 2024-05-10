@@ -28,6 +28,13 @@ Node *addNodeToTree(Node *root, int new_data) {
     }
     return root;
 }
+void NLR(Node *root) {
+    if (root != NULL) {
+        cout << root->data << " ";
+        NLR(root->left);
+        NLR(root->right);
+    }
+}
 int main() {
     // Write your code here
     Node *root = NULL;
@@ -53,5 +60,7 @@ int main() {
     root = addNodeToTree(root, 62);
     root = addNodeToTree(root, 68);
 
+    NLR(root);
+    cout << endl;
     return 0;
 }
