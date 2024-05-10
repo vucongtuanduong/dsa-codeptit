@@ -3,7 +3,28 @@ using namespace std;
 class Solution {
 public:
     vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
-        
+        vector<int> res;
+        pair<int, int> ans;
+        ans.first = -1;
+        ans.second = INT_MIN;
+        int n = mat.size();
+        int m = mat[0].size();
+        for (int i = 0; i < n; i++) {
+            int temp = 0;
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == 1) {
+                    temp++;
+                }
+            }
+            if (temp > ans.second) {
+                ans.first = i;
+                ans.second = temp;
+            }
+        }
+        res.push_back(ans.first);
+        res.push_back(ans.second);
+        return res;
+
     }
 };
 void testCase() {
