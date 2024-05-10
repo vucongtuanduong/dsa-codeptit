@@ -17,6 +17,17 @@ Node *makeNode(int new_data) {
     Node *n = new Node(new_data);
     return n;
 }
+Node *addNodeToTree(Node *root, int new_data) {
+    if (root == NULL) {
+        return makeNode(new_data);
+    }
+    if (new_data > root->data) {
+        root->right = addNodeToTree(root->right, new_data);
+    } else {
+        root->left = addNodeToTree(root->left, new_data);
+    }
+    return root;
+}
 int main() {
     // Write your code here
     return 0;
