@@ -28,6 +28,19 @@ Node *addNodeToTree(Node *root, int new_data) {
     }
     return root;
 }
+Node *rotateLeft(Node *root) {
+    Node *p = root;
+    if (root == NULL) {
+        return NULL;
+    } else if (root->right == NULL) {
+        return root;
+    } else {
+        p = root->right;
+        root->right = p->left;
+        p->left = root;
+    }
+    return p;
+}
 void NLR(Node *root) {
     if (root != NULL) {
         cout << root->data << " ";

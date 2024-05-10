@@ -28,6 +28,53 @@ Node *addNodeToTree(Node *root, int new_data) {
     }
     return root;
 }
+// int findMinValueNode(Node *root, int curr) {
+//     if (root != NULL) {
+//         curr = min(curr, findMinValueNode(root->left));
+//     }
+//     return curr;
+// }
+// Node* minValueNode(Node *root) {
+//     return findMinValueNode(root, INT_MAX);
+// }
+// Node *deleteNode(Node *root, int value) {
+//     if (root == NULL) {
+//         return root;
+//     }
+//     if (value < root->data) {
+//         root->left = deleteNode(root->left, value);
+//     } else if (value > root->data) {
+//         root->right = deleteNode(root->right, value);
+//     } else {
+//         if (root->left == NULL) {
+//             Node *temp = root->right;
+//             free(root);
+//             return temp;
+//         } else if (root->right == NULL) {
+//             Node *temp = root->left;
+//             free(root);
+//             return temp;
+//         }
+//         //truong hop node co ca hai cay con
+//         Node *temp = minValueNode(root->right);
+//         root->data = temp->data;
+//         root->right = deleteNode(root->right, temp->data);
+//     }
+//     return root;
+// }
+Node *rotateLeft(Node *root) {
+    Node *p = root;
+    if (root == NULL) {
+        return NULL;
+    } else if (root->right == NULL) {
+        return root;
+    } else {
+        p = root->right;
+        root->right = p->left;
+        p->left = root;
+    }
+    return p;
+}
 void NLR(Node *root) {
     if (root != NULL) {
         cout << root->data << " ";
@@ -62,5 +109,7 @@ int main() {
 
     NLR(root);
     cout << endl;
+    root = rotateLeft(root);
+    NLR(root);
     return 0;
 }
