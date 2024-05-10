@@ -11,7 +11,7 @@ class Node {
         }
 };
 
-Node *root = NULL;
+
 
 Node *makeNode(int new_data) {
     Node *n = new Node(new_data);
@@ -30,5 +30,28 @@ Node *addNodeToTree(Node *root, int new_data) {
 }
 int main() {
     // Write your code here
+    Node *root = NULL;
+    root = addNodeToTree(root, 40);
+    root = addNodeToTree(root, 30);
+    root = addNodeToTree(root, 60);
+    root = addNodeToTree(root, 25);
+    root = addNodeToTree(root, 35);
+    root = addNodeToTree(root, 50);
+    root = addNodeToTree(root, 70);
+    root = addNodeToTree(root, 20);
+    root = addNodeToTree(root, 28);
+    root = addNodeToTree(root, 32);
+    root = addNodeToTree(root, 38);
+    root = addNodeToTree(root, 55);
+    root = addNodeToTree(root, 65);
+    root = addNodeToTree(root, 90);
+    root = addNodeToTree(root, 15);
+    root = addNodeToTree(root, 22);
+    root = addNodeToTree(root, 26);
+    root = addNodeToTree(root, 29);
+    root = addNodeToTree(root, 36);
+    root = addNodeToTree(root, 62);
+    root = addNodeToTree(root, 68);
+
     return 0;
 }
