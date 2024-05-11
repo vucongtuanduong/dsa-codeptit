@@ -28,14 +28,21 @@ Node *addNodeToTree(Node *root, int new_data) {
     }
     return root;
 }
-void NLR(Node *root) {
+void NLR(Node *root) { //pre-order
     if (root != NULL) {
         cout << root->data << " ";
         NLR(root->left);
         NLR(root->right);
     }
 }
-void LRN(Node *root) {
+void LNR(Node *root) {//level-order
+    if (root != NULL) {
+        LNR(root->left);
+        cout << root->data << " ";
+        LNR(root->right);
+    }
+}
+void LRN(Node *root) { //post-order
     if (root != NULL) {
         LRN(root->left);
         LRN(root->right);
@@ -51,7 +58,7 @@ void testCase() {
         cin >> a[i];
         root = addNodeToTree(root, a[i]);
     }
-    LRN(root);
+    NLR(root);
     
     
 }

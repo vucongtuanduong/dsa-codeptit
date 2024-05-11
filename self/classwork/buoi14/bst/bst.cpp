@@ -82,6 +82,20 @@ void NLR(Node *root) {
         NLR(root->right);
     }
 }
+void LNR(Node *root) {//level-order
+    if (root != NULL) {
+        LNR(root->left);
+        cout << root->data << " ";
+        LNR(root->right);
+    }
+}
+void LRN(Node *root) { //post-order
+    if (root != NULL) {
+        LRN(root->left);
+        LRN(root->right);
+        cout << root->data << " ";
+    }
+}
 int main() {
     // Write your code here
     Node *root = NULL;
@@ -108,6 +122,8 @@ int main() {
     root = addNodeToTree(root, 68);
 
     NLR(root);
+    cout << endl;
+    LNR(root);
     cout << endl;
     root = rotateLeft(root);
     NLR(root);
