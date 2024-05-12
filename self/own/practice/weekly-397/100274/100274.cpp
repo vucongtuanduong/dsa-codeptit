@@ -3,19 +3,19 @@ using namespace std;
 class Solution {
 public:
     int maximumEnergy(vector<int>& energy, int k) {
-        
-        int res = INT_MIN;
         int n = energy.size();
-        for (int x = 0; x < n; x++) {
-            int i = x;
-            int sum = 0;
-            while (i < n) {
-                sum += energy[i];
-                i += k;
+        vector<int> dp(n, 0);
+        for (int i = n - 1; i>= 0; i--) {
+            dp[i] = energy[i];
+            if (i + k < n) {
+                dp[i] += dp[i + k];
             }
-            res = max(res, sum);
         }
-        return res;
+        for (auto x : dp) {
+            cout << x << " ";
+        }
+        cout << endl;
+        return *max_element(dp.begin(), dp.end());
     }
 };
 void testCase() {
