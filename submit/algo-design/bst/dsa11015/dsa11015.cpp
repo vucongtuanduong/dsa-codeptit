@@ -1,69 +1,121 @@
-#include <bits/stdc++.h>
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <cstring>
+#include <algorithm>
+#include <queue>
+#include <map>
+#include <unordered_map>
+#include <set>
+#include <stack>
+#include <cmath>
+#include <climits>
+#include <iomanip>
+#include <cstdlib>
+#include <numeric>
+#include <unordered_set>
 using namespace std;
+
+#define ll long long
+#define FOR(i, a, b) for(int i = a; i <= b; i++)
+#define FORD(i, a, b) for(int i = a; i >= b; i--)
+#define F(i, a, b) for(int i = a; i < b; ++i)
+#define FD(i, a, b) for(int i = a; i > b; --i)
+#define faster() ios_base::sync_with_stdio(0); cin.tie(NULL); cout.tie(NULL);
+#define vi vector<int>
+#define vll vector<ll>
+#define all(x) (x).begin(), (x).end()
+#define endl '\n'
+
+int d = 0;
+bool check = true;
+
+string res1 = "";
+string res2 = "";
+
+long long sum = 0;
+int ans = -1e9;
 
 class Node {
 public:
-    int data;
-    Node *left, *right;
+	int x;
+	Node* left;
+	Node* right;
 
-    Node(int data) {
-        this->data = data;
-        this->left = this->right = NULL;
-    }
+	Node(int x) {
+		this->x = x;
+		left = nullptr;
+		right = nullptr;
+	}
 };
 
-unordered_map<int, Node*> nodeMap;
-int maxPathSum;
+unordered_map<int, Node*> mp;
 
-int calcMaxPathSum(Node* node) {
-    if (node == NULL) return 0;
-    int left = calcMaxPathSum(node->left);
-    int right = calcMaxPathSum(node->right);
-    int max_single = max(max(left, right) + node->data, node->data);
-    int max_top = max(max_single, left + right + node->data);
-    maxPathSum = max(maxPathSum, max_top);
-    return max_single;
+void connect(Node* r, int u, int v, char c) {
+	if (r == nullptr) return;
+	if (r->x == u) {
+		Node* n = new Node(v);
+		if (c == 'L') r->left = n;
+		else r->right = n;
+	}
+	else {
+		connect(r->left, u, v, c);
+		connect(r->right, u, v, c);
+	}
 }
 
-Node* buildTree(int u, int v, char x) {
-    Node* parentNode;
-    if (nodeMap.find(u) == nodeMap.end()) {
-        parentNode = new Node(u);
-        nodeMap[u] = parentNode;
-    } else {
-        parentNode = nodeMap[u];
-    }
 
-    Node* childNode = new Node(v);
-    if (x == 'L') parentNode->left = childNode;
-    else parentNode->right = childNode;
 
-    nodeMap[v] = childNode;
 
-    return parentNode;
-}
+int calc(Node* root) {
+	if (root == nullptr) return 0;
 
-void testCase() {
-    int n;
-    cin >> n;
-    int u, v;
-    char x;
-    Node* root = NULL;
-    nodeMap.clear();
-    for (int i = 0; i < n; i++) {
-        cin >> u >> v >> x;
-        root = buildTree(u, v, x);
-    }
-    maxPathSum = INT_MIN;
-    calcMaxPathSum(root);
-    cout << maxPathSum << endl;
+	int L = calc(root->left), R = calc(root->right);
+
+	if (root->left == nullptr && root->right == nullptr) return root->x;
+
+	if (root->left == nullptr) return R + root->x;
+	if (root->right == nullptr) return L + root->x;
+
+	ans = max(ans, L + R + root->x);
+
+	return max(L, R) + root->x;
 }
 
 int main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        testCase();
-    }
-    return 0;
+	faster();
+	int t;
+	cin >> t;
+
+	while (t--) {
+		ans = -1e9;
+		mp.clear();
+		int n;
+		cin >> n;
+
+		Node* root = nullptr;
+
+		while (n--) {
+			int u, v;
+			char c;
+
+			cin >> u >> v >> c;
+
+			if (root == nullptr) {
+				root = new Node(u);
+				mp[u] = root;
+				connect(root, u, v, c);
+
+			}
+			else
+				connect(root, u, v, c);
+		}
+
+		calc(root);
+		cout << ans << endl;
+
+	}
+	return 0;
 }
