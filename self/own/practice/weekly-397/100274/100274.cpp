@@ -11,10 +11,10 @@ public:
                 dp[i] += dp[i + k];
             }
         }
-        for (auto x : dp) {
-            cout << x << " ";
-        }
-        cout << endl;
+        // for (auto x : dp) {
+        //     cout << x << " ";
+        // }
+        // cout << endl;
         return *max_element(dp.begin(), dp.end());
     }
 };
