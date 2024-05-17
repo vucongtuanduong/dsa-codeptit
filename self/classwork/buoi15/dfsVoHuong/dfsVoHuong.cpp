@@ -29,21 +29,20 @@ void dfsPath(Graph *g, int start, int end) {
             }
         }
     }
-    if (precedence[end] == -1) {
+    int temp = end;
+    stack<int> path;
+    path.push(temp);
+    while(precedence[temp] != -1) {
+        temp = precedence[temp];
+        path.push(temp);
+    }
+    if (path.size() == 0) {
         cout << "-1";
         return;
-    } else {
-        int temp = end;
-        stack<int> path;
-        path.push(temp);
-        while(precedence[temp] != -1) {
-            temp = precedence[temp];
-            path.push(temp);
-        }
-        while (!st.empty()) {
-            cout << st.top() << " ";
-            st.pop();
-        }
+    }
+    while (!path.empty()) {
+        cout << path.top() + 1 <<" ";
+        path.pop();
     }
 }
 void bfs(Graph *g, int start) {
