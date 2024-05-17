@@ -45,6 +45,34 @@ void dfsPath(Graph *g, int start, int end) {
         path.pop();
     }
 }
+void dfsSpanningTree(Graph *g, int start) {
+    vector<pair<int, int>> spanningTree;
+    stack<int> st;
+    vector<bool> visited(g->nV, false);
+    st.push(start);
+    visited[start] = true;
+    while (!st.empty()) {
+        int u = st.top();
+        st.pop();
+        for (int v : g->edges[u]) {
+            if (!visited[v]) {
+                visited[v] = true;
+                st.push(u);
+                st.push(v);
+                spanningTree.push_back({u, v});
+                
+                break;
+            }
+        }
+    } 
+    if (spanningTree.size() != g->nV - 1) {
+        cout << "Khong co cay khung!";
+        return;
+    }
+    for (auto x : spanningTree) {
+        cout << x.first + 1 << " " << x.second + 1 << endl;
+    }
+}
 void bfs(Graph *g, int start) {
     queue<int> q;
     vector<bool> visited(g->nV, false);
@@ -108,7 +136,8 @@ void testCase2(){
         g->edges[u - 1].push_back(v - 1);
         g->edges[v - 1].push_back(u - 1);
     }
-    dfsPath(g, start - 1, end - 1);
+    // dfsPath(g, start - 1, end - 1);
+    dfsSpanningTree(g, start - 1);
 }
 void testCase() {
     int nV, nE, start;
