@@ -66,7 +66,7 @@ void dfsSpanningTree(Graph *g, int start) {
         }
     } 
     if (spanningTree.size() != g->nV - 1) {
-        cout << "Khong co cay khung!";
+        cout << "-1";
         return;
     }
     for (auto x : spanningTree) {
@@ -152,7 +152,8 @@ void testCase() {
     vector<bool> visited(g->nV, false);
     // dfs(g, start - 1);
     // dfsRec(g, start - 1, visited);
-    bfs(g, start - 1);
+    // bfs(g, start - 1);
+    dfsSpanningTree(g, start - 1);
 
 }
 int main() {
@@ -160,7 +161,7 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-        testCase2();
+        testCase();
         cout << endl;
     }
     return 0;
