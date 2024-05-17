@@ -10,6 +10,61 @@ class Graph {
             this->edges.resize(this->nV);
         }
 };
+void dfsPath(Graph *g, int start, int end) {
+    vector<int> precedence(g->nV, -1);
+    vector<bool> visited(g->nV, false);
+    stack<int> st;
+    st.push(start);
+    visited[start] = true;
+    while (!st.empty()) {
+        int u = st.top();
+        st.pop();
+        for (int v : g->edges[u]) {
+            if (!visited[v]) {
+                visited[v] = true;
+                st.push(u);
+                st.push(v);
+                precedence[v] = u;
+                break;
+            }
+        }
+    }
+    if (precedence[end] == -1) {
+        cout << "-1";
+        return;
+    } else {
+        int temp = end;
+        stack<int> path;
+        path.push(temp);
+        while(precedence[temp] != -1) {
+            temp = precedence[temp];
+            path.push(temp);
+        }
+        while (!st.empty()) {
+            cout << st.top() << " ";
+            st.pop();
+        }
+    }
+}
+void bfs(Graph *g, int start) {
+    queue<int> q;
+    vector<bool> visited(g->nV, false);
+    q.push(start);
+
+    visited[start] = true;
+    cout << start + 1 << " ";
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+        for (int v : g->edges[u]) {
+            if (!visited[v]) {
+                q.push(v);
+                cout << v + 1 << " ";
+                visited[v] = true;
+            }
+        }
+    }
+}
 void dfsRec(Graph *g, int x, vector<bool> &visited) {
     visited[x] = true;
     cout << x + 1 << " ";
@@ -43,6 +98,19 @@ void dfs(Graph *g, int start) {
         cout << u + 1 << " ";
     }
 }
+
+void testCase2(){ 
+    int nV, nE, start, end;
+    cin >> nV >> nE >> start >> end;
+    Graph *g = new Graph(nV, nE);
+    for (int i = 0; i < nE; i++) {
+        int u, v;
+        cin >> u >> v;
+        g->edges[u - 1].push_back(v - 1);
+        g->edges[v - 1].push_back(u - 1);
+    }
+    dfsPath(g, start - 1, end - 1);
+}
 void testCase() {
     int nV, nE, start;
     cin >> nV >> nE >> start;
@@ -54,8 +122,9 @@ void testCase() {
         g->edges[v - 1].push_back(u - 1);
     }
     vector<bool> visited(g->nV, false);
-    dfs(g, start - 1);
+    // dfs(g, start - 1);
     // dfsRec(g, start - 1, visited);
+    bfs(g, start - 1);
 
 }
 int main() {
@@ -63,7 +132,7 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-        testCase();
+        testCase2();
         cout << endl;
     }
     return 0;
