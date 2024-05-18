@@ -1,11 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
-class Node{
+class Node {
     public:
         int data;
         Node *left;
         Node *right;
-
         Node(int data) {
             this->data = data;
             this->left = this->right = NULL;
@@ -17,31 +16,34 @@ Node *buildTree(Node *root, int x) {
     } 
     if (x > root->data) {
         root->right = buildTree(root->right, x);
-    } else {
+    } else if (x < root->data) {
         root->left = buildTree(root->left, x);
-    }
+    } 
     return root;
 }
-void LNR(Node *root) {
+void heightTree(Node *root, int count, vector<int> &res) {
     if (root != NULL) {
-        LNR(root->left);
-        cout << root->data << " ";
-        LNR(root->right);
+        if (root->left == NULL && root->right == NULL) {
+            res.push_back(count);
+        }
+        heightTree(root->left, count + 1, res);
+        heightTree(root->right, count + 1, res);
+
     }
 }
 void testCase() {
     int n;
     cin >> n;
-    int u, v;
-    char x;
-    cin >> u >> v >> x;
-    Node *root = new Node(u);
-    root = buildTree(root, v);
-    for (int i = 1; i < n; i++) {
-        cin >> u >> v >> x;
-        buildTree(root, v);
+    vector<int> a(n);
+    Node *root = NULL;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        root = buildTree(root, a[i]);
     }
-    LNR(root);
+    vector<int> res;
+    int count = 0;
+    heightTree(root, count, res);
+    cout << *max_element(res.begin(), res.end());
 }
 int main() {
     // Write your code here

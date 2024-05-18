@@ -1,11 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
-class Node{
+class Node {
     public:
         int data;
         Node *left;
         Node *right;
-
         Node(int data) {
             this->data = data;
             this->left = this->right = NULL;
@@ -22,26 +21,23 @@ Node *buildTree(Node *root, int x) {
     }
     return root;
 }
-void LNR(Node *root) {
+void LRN(Node *root) {
     if (root != NULL) {
-        LNR(root->left);
+        LRN(root->left);
+        LRN(root->right);
         cout << root->data << " ";
-        LNR(root->right);
     }
 }
 void testCase() {
     int n;
     cin >> n;
-    int u, v;
-    char x;
-    cin >> u >> v >> x;
-    Node *root = new Node(u);
-    root = buildTree(root, v);
-    for (int i = 1; i < n; i++) {
-        cin >> u >> v >> x;
-        buildTree(root, v);
+    Node *root = NULL;
+    for (int i = 0; i < n; i++) {
+        int x; 
+        cin >> x;
+        root = buildTree(root, x);
     }
-    LNR(root);
+    LRN(root);
 }
 int main() {
     // Write your code here
