@@ -4,17 +4,33 @@ class Solution {
 private:
     vector<vector<int>> res;
     vector<int> temp;
-    void Try(int i) {
+    int n;
+    void result(vector<int> nums) {
+        vector<int> kq;
+        for (int i = 0; i < n; i++) {
+            if (temp[i] == 1) {
+                kq.push_back(nums[i]);
+            }
+        }
+        res.push_back(kq);
+    }
+    void Try(int i, vector<int> nums) {
         for (int j = 0; j <= 1; j++) {
             temp[i] = j;
+            if (i == n - 1) {
+                result(nums);
+            } else {
+                Try(i + 1, nums);
+            }
         }
     }
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        int n = nums.size();
+        n = nums.size();
         res.clear();
         temp.resize(n);
-        Try(0);    
+        Try(0, nums);    
+        return res;
     }
 };
 void testCase() {
