@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+int maxHeight;
+int maxWeight;
+int largestArea(vector<vector<int>> &a, int n, int m);
+int calArea(vector<int> height);
 int calArea(vector<int> height) {
     stack<int> st;
     int maxArea = 0;
@@ -15,7 +18,12 @@ int calArea(vector<int> height) {
             } else {
                 width = i - st.top() - 1;
             }
-            maxArea = max(maxArea, nowHeight * width);
+            if (nowHeight * width > maxArea) {
+                maxHeight = nowHeight;
+                maxWeight = width;
+                maxArea =nowHeight * width;
+            } 
+            
         }
         st.push(i);
     }
@@ -36,40 +44,21 @@ int largestArea(vector<vector<int>> &a, int n, int m) {
     }
     return maxArea;
 }
-
-void solve() {
-    int N, M;
-    cin >> N >> M;
-    vector<vector<int>> matrix(N, vector<int>(M));
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < M; j++)
-            cin >> matrix[i][j];
-    vector<int> hist(M, 0);
-    int max_area = 0, min_side = 0, max_side = 0;
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            if (matrix[i][j] == 0)
-                hist[j] = 0;
-            else
-                hist[j] += 1;
+int main () {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m;
+        cin >> n >> m;
+        vector<vector<int>>a(n, vector<int>(m));
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                cin >> a[i][j];
+            }
         }
-        int area = largestRectangleArea(hist);
-        if (area > max_area) {
-            max_area = area;
-            max_side = *max_element(hist.begin(), hist.end());
-            min_side = max_area / max_side;
-        }
+        cout << largestArea(a, n, m);
+        cout << "\n" << maxHeight << " " << maxWeight << endl;
     }
-    cout << min_side << " " << max_side << "\n";
-}
-
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    int T;
-    cin >> T;
-    while (T--) {
-        solve();
-    }
+    
     return 0;
 }
