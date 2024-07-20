@@ -44,15 +44,19 @@ void testCase2(){
 	se.insert(s[0]);
 	int i1=0;
 	int m1=0;
+	map<char,int>mp;
+	mp.insert({s[0],0});
 	for(int i=1;i<n;i++)
 	{
 		if(se.find(s[i])==se.end())
 		{
 			l[i]=l[i-1]+1;
 			se.insert(s[i]);
+			mp.insert({s[i],i});
 		}
 		else
-		{
+		{	
+			mp[s[i]]=i;
 			l[i]=l[i-1];
 		}
 		if(l[i]==1)
@@ -65,7 +69,12 @@ void testCase2(){
 			break;
 		}
 	}
-    cout << "m1: " << m1 << endl;
+	int lon1=0,nho1=lim;
+	for(auto x:mp){
+		if(lon1<x.second)lon1=x.second;
+		if(nho1>=x.second)nho1=x.second;
+	}
+	
 	reverse(s.begin(),s.end());
 	se.clear();
 	int r[n];
@@ -73,15 +82,19 @@ void testCase2(){
 	se.insert(s[0]);
 	int i2=0;
 	int m2=0;
+	map<char,int>mp1;
+	mp1.insert({s[0],0});
 	for(int i=1;i<n;i++)
 	{
 		if(se.find(s[i])==se.end())
 		{
 			r[i]=r[i-1]+1;
 			se.insert(s[i]);
+			mp1.insert({s[i],i});
 		}
 		else
-		{
+		{	
+			mp1[s[i]]=i;
 			r[i]=r[i-1];
 		}
 		if(r[i]==1)
@@ -94,8 +107,12 @@ void testCase2(){
 			break;
 		}
 	}
-    cout << "m2: " << m2 << endl;
-	cout<<min(m1,m2);
+	int lon2=0,nho2=lim;
+	for(auto x:mp1){
+		if(lon2<x.second)lon2=x.second;
+		if(nho2>=x.second)nho2=x.second;
+	}
+	cout<<min({m1,m2,lon1-nho1+1,lon2-nho2+1});
 }
 int main() {
     // Write your code here
