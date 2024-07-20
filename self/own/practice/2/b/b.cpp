@@ -114,12 +114,47 @@ void testCase2(){
 	}
 	cout<<min({m1,m2,lon1-nho1+1,lon2-nho2+1});
 }
+void testCase3() {
+    string s;
+    cin >> s;
+    unordered_set<char> unique_chars(s.begin(), s.end());
+    int required_count = unique_chars.size();
+
+    std::unordered_map<char, int> window_count;
+    int left = 0, right = 0, formed = 0;
+    int min_length = INT_MAX;
+
+    while (right < s.length()) {
+        char c = s[right];
+        window_count[c]++;
+
+        if (unique_chars.count(c) && window_count[c] == 1) {
+            formed++;
+        }
+
+        while (left <= right && formed == required_count) {
+            char temp_c = s[left];
+            if (right - left + 1 < min_length) {
+                min_length = right - left + 1;
+            }
+
+            window_count[temp_c]--;
+            if (unique_chars.count(temp_c) && window_count[temp_c] == 0) {
+                formed--;
+            }
+            left++;
+        }
+        right++;
+    }
+
+   cout << min_length;
+}
 int main() {
     // Write your code here
     int t;
     cin >> t;
     while (t--) {
-        testCase2();
+        testCase3();
         cout << endl;
     }
     return 0;

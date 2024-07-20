@@ -3,8 +3,6 @@ using namespace std;
 const int MAX = 100000;
 vector<int> prime(MAX + 1, 0);
 void sieve() {
-    prime[0] = 1;
-    prime[1] = 1;
     for (int i = 2; i <= MAX; i++) {
         if (prime[i] == 0) {
             for (int j = i; j <= MAX;j += i) {

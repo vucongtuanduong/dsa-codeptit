@@ -3,7 +3,7 @@ using namespace std;
 void testCase(){ 
     int n, q;
     cin >> n >> q;
-    int a[100] = {0};
+    int a[n + 3] = {0};
     while (q--) {
         int x, y;
         cin >> x >> y;
