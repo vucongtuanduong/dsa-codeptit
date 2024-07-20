@@ -18,7 +18,7 @@ void testCase() {
     
     for (int i = 0; i < n; i++) {
         int j = n - 1;
-        while (i <> j) {
+        while (i < j) {
             long long sum1 = 0, sum2 = 0, sum3 = 0;
             for (int x = 0; x <= i; x++) {
                 sum1 += a[x];
@@ -30,13 +30,10 @@ void testCase() {
             if (sum1 == sum2 && sum2 == sum3) {
                 res++;
             }
-            cout << "i: " << i << ", j: " << j << endl;
-            cout << "sum1: " << sum1 << ", sum2: " << sum2 << ", sum3: " << sum3 << endl;
-            // sum1 = sum2 = sum3 = 0;
             j--;
         }
     }
-    cout << res;
+    cout << res * 6;
 }
 int main() {
     // Write your code here
