@@ -18,7 +18,7 @@ void testCase() {
         if (d != 0) {
             y = (u * x - tong) / (d);
             int mod = (u * x - tong) % (d);
-            if (y > 0 && mod == 0) {
+            if (y >= 0 && mod == 0) {
                 // cout << "x: " << x << ", y: " << y << endl;
                 res = min(res, x + y);
             }
