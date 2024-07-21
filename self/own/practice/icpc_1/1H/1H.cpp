@@ -31,6 +31,7 @@ void testCase() {
     } 
     cout << res;
 }
+
 int main() {
     // Write your code here
     init();
