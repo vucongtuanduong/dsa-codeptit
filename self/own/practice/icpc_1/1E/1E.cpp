@@ -1,21 +1,41 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <deque>
+#include <climits>
+
 using namespace std;
 
 int main() {
-    // Write your code here
-    int n,c;
-	cin>>n>>c;
-	long long a[n+1];
-	for(int i=1;i<=n;i++)cin>>a[i];
-	long long dp[n+1]={};
-	dp[2]=c+(a[2]-a[1])*(a[2]-a[1]);
-	for(int i=3;i<=n;i++){
-        for (int j = i + 1; j <= n; j++) {
-            
+    int N, C;
+    cin >> N >> C;
+    
+    vector<int> H(N);
+    for (int i = 0; i < N; ++i) {
+        cin >> H[i];
+    }
+    
+    vector<long long> dp(N, LLONG_MAX);
+    dp[0] = 0;
+    
+    deque<int> dq;
+    dq.push_back(0);
+    
+    for (int i = 1; i < N; ++i) {
+        while (!dq.empty() && dq.front() < i - 1) {
+            dq.pop_front();
         }
-		dp[i]=min(dp[i-1]+(a[i]-a[i-1])*((a[i]-a[i-1]))+c,dp[i-2]+((a[i]-a[i-2])*(a[i]-a[i-2]))+c);
-	}
-//	for(long long x:dp)cout<<x<<" ";
-	cout<<dp[n];
+        
+        long long cost = (H[i] - H[dq.front()]) * (H[i] - H[dq.front()]) + C;
+        dp[i] = dp[dq.front()] + cost;
+        
+        while (!dq.empty() && dp[dq.back()] >= dp[i]) {
+            dq.pop_back();
+        }
+        
+        dq.push_back(i);
+    }
+    
+    cout << dp[N-1] << endl;
+    
     return 0;
 }
