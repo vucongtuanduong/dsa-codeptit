@@ -1,53 +1,62 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+#include <string>
+
 using namespace std;
 
 int main() {
-    // Write your code here
-    long long n, k;
-    cin >> n >> k;
-    // int res = 0;
-    // for (int i = k; i <= n - 1; i++) {
-    //     for (int j = i + 1; j <= n; j++) {
-    //         int x = (n - i) / (j) ;
-    //         x++;
-    //         // cout << x << " ";
-    //         res += x;
-    //     }
-    // }
-    // // cout << endl;
-    // cout << res;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
 
-    if (k == 0) {
-        long long res = n * n;
-        cout << res;
-        return 0;
-    }
-    long long x = n - k;
-    long long res = (x * (x + 1)) / 2;
-    for (long long i = k; i <= n; i++) {
-        int j = i + 1;
-        while (j <= (n - i)) {
-            
-            long long temp = (n - i) / (j);
-            cout << "i: " << i << ", j: " << j << ", temp: " << temp << endl;
-            res += temp;
-            j++;
+    int n;
+    cin >> n;
+    string signs;
+    cin >> signs;
+
+    vector<int> transformed_sequence;
+    int current_sum = 0;
+
+    // Calculate the cumulative sum of signs
+    for (char sign : signs) {
+        if (sign == '+') {
+            current_sum += 1;
+        } else {
+            current_sum -= 1;
         }
-        // long long temp = (n - k) / (i + 1);
-        // res += temp;
+        transformed_sequence.push_back(current_sum);
     }
-    cout << res;
 
+    // Use a set to track all possible sums we can achieve with the transformed sequence
+    unordered_set<int> possible_sums;
+    current_sum = 0;
+    for (int value : transformed_sequence) {
+        current_sum += value;
+        possible_sums.insert(current_sum);
+    }
 
-    // long long count = 0;
-    // for (long long i = 1; i <= n; i++) {
-    //     for (long long j = 1; j <= n; j++) {
-    //         if (i % j >= k) {
-    //             cout << i << " " << j << endl;
-    //             count++;
-    //         }
-    //     }
-    // }
-    // cout << endl << count << endl;
+    // Add the sums that can be achieved by just using `a` and `b` alone
+    possible_sums.insert(0);
+
+    int q;
+    cin >> q;
+    vector<pair<int, int>> queries(q);
+    for (int i = 0; i < q; ++i) {
+        cin >> queries[i].first >> queries[i].second;
+    }
+
+    // Process each query
+    for (const auto& query : queries) {
+        int a = query.first;
+        int b = query.second;
+
+        // Check if we can achieve the sum `a` or `-a` or `b` or `-b` using the possible sums
+        if (possible_sums.count(a) || possible_sums.count(-a) || possible_sums.count(b) || possible_sums.count(-b)) {
+            cout << "YES\n";
+        } else {
+            cout << "NO\n";
+        }
+    }
+
     return 0;
 }
